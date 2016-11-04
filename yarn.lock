@@ -78,7 +78,7 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/fs.realpath/download/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
-glob@^7.0.3:
+glob@^7.0.3, glob@^7.0.5:
   version "7.1.1"
   resolved "http://registry.npm.taobao.org/glob/download/glob-7.1.1.tgz#805211df04faaf1c63a3600306cdf5ade50b2ec8"
   dependencies:
@@ -199,6 +199,12 @@ resolve@^1.1.7:
   version "1.1.7"
   resolved "http://registry.npm.taobao.org/resolve/download/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
 
+rimraf:
+  version "2.5.4"
+  resolved "http://registry.npm.taobao.org/rimraf/download/rimraf-2.5.4.tgz#96800093cbf1a0c86bd95b4625467535c29dfa04"
+  dependencies:
+    glob "^7.0.5"
+
 sprintf-js@^1.0.3:
   version "1.0.3"
   resolved "http://registry.npm.taobao.org/sprintf-js/download/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
@@ -227,6 +233,10 @@ tslint-eslint-rules@^2.0.1:
   dependencies:
     doctrine "^0.7.2"
     tslint "^3.15.1"
+
+tslint-react:
+  version "1.1.0"
+  resolved "http://registry.npm.taobao.org/tslint-react/download/tslint-react-1.1.0.tgz#a068d0624a99829098059f76c19d62babb82da5a"
 
 typescript:
   version "2.0.7"
