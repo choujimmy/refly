@@ -7,7 +7,7 @@
     "lint:ts": "tslint 'src/**/*.ts{,x}'",
     "lint:js": "eslint .",
     "lint": "npm run lint:js && npm run lint:ts",
-    "dev": "concurrently --kill-others \"npm run dev:watch-server\" \"npm run dev:run-server\"",
+    "dev": "cross-env DEBUG=refly:* DEBUG_COLORS=1 concurrently --kill-others \"npm run dev:watch-server\" \"npm run dev:run-server\"",
     "dev:run-server": "just-wait -p \"build/server.js\" && node build/server.js",
     "dev:watch-server": "webpack --colors --config tools/webpack/webpack.config.server.dev.js"
   },
@@ -30,10 +30,15 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/debug": "^0.0.29",
+    "@types/es6-promise": "^0.0.32",
+    "@types/koa": "^2.0.33",
     "@types/node": "^6.0.46",
     "@types/react": "^0.14.44",
+    "@types/react-dom": "^0.14.18",
     "awesome-typescript-loader": "^2.2.4",
     "concurrently": "^3.1.0",
+    "cross-env": "^3.1.3",
     "eslint": "^3.9.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.3.0",
@@ -49,6 +54,10 @@
     "webpack": "2.1.0-beta.25"
   },
   "dependencies": {
-    "react": "^15.3.2"
+    "debug": "^2.2.0",
+    "es6-promise": "^4.0.5",
+    "koa": "next",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
   }
 }

@@ -6,7 +6,7 @@ const config = require('./webpack.config')
 const isDebug = !(process.env.NODE_ENV === 'production')
 
 const serverConfig = extend(true, {}, config, {
-  entry: './server.ts',
+  entry: './server/index.ts',
   target: 'node',
   output: {
     filename: '../../server.js',
