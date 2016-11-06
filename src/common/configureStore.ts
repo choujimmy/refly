@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose, GenericStoreEnhancer, Middleware } from 'redux'
 import thunk from 'redux-thunk'
-import rootReducer from '../reducer'
+import rootReducer from './rootReducer'
 import createHelpers, { HelperConfig } from './createHelpers'
 
 declare var __DEV__: boolean

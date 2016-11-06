@@ -2,16 +2,17 @@ import * as path from 'path'
 import * as Koa from 'koa'
 import * as serve from 'koa-static'
 import * as convert from 'koa-convert'
+import * as bodyParser from 'koa-bodyparser'
 import * as session from 'koa-session'
 import * as jwt from 'koa-jwt'
 import * as passport from 'koa-passport'
+
+import render from './render'
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom/server'
 
 import { port, auth } from './config'
-import configureStore from './models/store/configureStore'
-import { setRuntimeVariable } from './models/runtime/action'
 
 const app = new Koa()
 
@@ -27,6 +28,7 @@ global.navigator.userAgent = global.navigator.userAgent || 'all'
 app.use(serve(path.join(__dirname, 'public'), {
   maxage: 31536000 * 1000
 }))
+app.use(bodyParser())
 
 //
 // 认证部分
@@ -41,24 +43,7 @@ app.use(convert(session(app)))
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(async (ctx, next) => {
-  try {
-    const store = configureStore(
-      {
-        user: (ctx as any).session.user || null
-      },
-      {
-        cookie: ctx.headers['cookie']
-      }
-    )
-
-    store.dispatch(setRuntimeVariable('initialNow',Date.now()))
-
-  } catch (err) {
-    console.log('服务端渲染错误', err)
-    next()
-  }
-})
+app.use(render())
 
 //
 // 运行服务端
