@@ -8,10 +8,6 @@ import * as jwt from 'koa-jwt'
 import * as passport from 'koa-passport'
 
 import render from './render'
-
-import * as React from 'react'
-import * as ReactDOM from 'react-dom/server'
-
 import { port, auth } from './config'
 
 const app = new Koa()

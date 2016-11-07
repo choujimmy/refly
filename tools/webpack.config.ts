@@ -118,7 +118,7 @@ const config = {
 // -----------------------------------------------------------------------------
 
 const clientConfig = extend(true, {}, config, {
-  entry: './client/index.ts',
+  entry: './browser/index.ts',
 
   output: {
     filename: isDebug ? '[name].js?[chunkhash]' : '[name].[chunkhash].js',
