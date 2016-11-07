@@ -7,10 +7,11 @@ const route: UniversalRouter.Route<Context, Page> = {
 
   path: '/',
 
-  async action () {
+  async action (): Promise<Page> {
     return {
       title: 'Home',
-      component: <Home />
+      component: <Home />,
+      description: 'description'
     }
   }
 }
