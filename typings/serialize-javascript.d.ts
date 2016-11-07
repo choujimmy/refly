@@ -3,7 +3,7 @@ declare module 'serialize-javascript' {
 
   namespace serialize {
     interface Option {
-      isJson?: boolean
+      isJSON?: boolean
     }
   }
 

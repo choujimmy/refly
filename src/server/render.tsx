@@ -1,13 +1,17 @@
 import * as Koa from 'koa'
 import * as React from 'react'
+import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import * as UniversalRouter from 'universal-router'
+import * as fs from 'fs'
 
 import configureStore from '../common/configureStore'
 import { setVariable } from '../common/actions/runtime'
 import routes from '../browser/routes'
-import { Page, Context, AppContext } from '../browser/routes/context'
+import { Page, Context } from '../browser/routes/context'
+import App from '../browser/components/App'
+import Html from './Html'
 
-declare var __DEV__: boolean
+const assets = JSON.parse(fs.readFileSync(__dirname + '/assets.json').toString())
 
 const render = () => {
   return async (ctx: Koa.Context, next: any) => {
@@ -24,14 +28,13 @@ const render = () => {
 
       const css = new Set()
 
-      const context: Context = {
+      const context = {
         insertCss: (...styles: any[]) => {
           styles.forEach(style => css.add(style._getCss()))
         },
         store
       }
-
-      const route = await UniversalRouter.resolve<AppContext, Page>(
+      const route = await UniversalRouter.resolve<Context, Page>(
         routes,
         {
           insertCss: context.insertCss,
@@ -42,20 +45,26 @@ const render = () => {
       )
 
       if (route.redirect) {
-        ctx.redirect(route.status || 302, route.redirect)
+        ctx.status = route.status || 302
+        ctx.redirect(route.redirect)
         return
       }
 
-      const data = { ...route }
-      data.children = ReactDOM.renderToString(<App context={context}>{route.component}</App>)
-      data.style = [...css].join('')
-      data.script = assets.main.js
-      data.state = context.store.getState()
-      data.lang = locale
-      data.chunk = assets[route.chunk] && assets[route.chunk].js
-
-      const html = ReactDOM.renderToStaticMarkup(<Html {...data} />)
-
+      const html = renderToStaticMarkup(
+        <Html
+          title={route.title}
+          description={route.description}
+          style={[...css].join('')}
+          script={assets.main.js}
+          state={context.store.getState()}
+          chunk={assets[route.chunk] && assets[route.chunk].js}
+          children={renderToString(
+            <App store={context.store} insertCss={context.insertCss}>
+              {route.component}
+            </App>
+          )}
+        />
+      )
       ctx.status = route.status || 200
       ctx.body = `<!doctype html>${html}`
     } catch (err) {

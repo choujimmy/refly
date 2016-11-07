@@ -1,11 +1,11 @@
 import * as React from 'react'
 import * as UniversalRouter from 'universal-router'
-import { Page, AppContext } from '../context'
+import { Page, Context } from '../context'
 import NotFound from './NotFound'
 
-export default class NotFoundRoute implements UniversalRouter.Route<AppContext, Page> {
+const route: UniversalRouter.Route<Context, Page> = {
 
-  path: '*'
+  path: '*',
 
   action () {
     return {
@@ -15,3 +15,5 @@ export default class NotFoundRoute implements UniversalRouter.Route<AppContext, 
     }
   }
 }
+
+export default route

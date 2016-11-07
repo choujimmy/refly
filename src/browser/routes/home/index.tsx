@@ -1,11 +1,11 @@
 import * as React from 'react'
 import * as UniversalRouter from 'universal-router'
 import Home from './Home'
-import { Page, AppContext } from '../context'
+import { Page, Context } from '../context'
 
-export default class HomeRoute implements UniversalRouter.Route<AppContext, Page> {
+const route: UniversalRouter.Route<Context, Page> = {
 
-  path: '/'
+  path: '/',
 
   async action () {
     return {
@@ -14,3 +14,5 @@ export default class HomeRoute implements UniversalRouter.Route<AppContext, Page
     }
   }
 }
+
+export default route

@@ -138,8 +138,7 @@ const clientConfig = extend(true, {}, config, {
     // https://github.com/sporto/assets-webpack-plugin#options
     new AssetsPlugin({
       path: path.resolve(__dirname, '../build'),
-      filename: 'assets.js',
-      processOutput: (x: any) => `module.exports = ${JSON.stringify(x)}`
+      filename: 'assets.json'
     }),
 
     new webpack.optimize.OccurrenceOrderPlugin(true),

@@ -1,19 +1,19 @@
 import * as UniversalRouter from 'universal-router'
 
-import { Page, AppContext } from './context'
-import HomeRoute from './home'
-import NotFoundRoute from './notFound'
+import { Page, Context } from './context'
+import homeRoute from './home'
+import notFoundRoute from './notFound'
 
-class RootRoute implements UniversalRouter.Route<AppContext, Page> {
+const route: UniversalRouter.Route<Context, Page> = {
 
-  path: '/'
+  path: '/',
 
   children: [
-    HomeRoute,
-    NotFoundRoute
-  ]
+    homeRoute,
+    notFoundRoute
+  ],
 
-  async action ({ next }: AppContext) {
+  async action ({ next }: Context) {
     let route: Page
 
     do {
@@ -27,7 +27,5 @@ class RootRoute implements UniversalRouter.Route<AppContext, Page> {
   }
 
 }
-
-const route = new RootRoute()
 
 export default route

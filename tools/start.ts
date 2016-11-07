@@ -43,6 +43,8 @@ const start = async () => {
       const bs = browserSync.create()
 
       const bsOption: any = {
+        open: false,
+        online: false,
         proxy: {
           target: server.host,
           middleware: [wpMiddleware, hotMiddleware]

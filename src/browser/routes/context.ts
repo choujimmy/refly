@@ -3,15 +3,13 @@ export interface Page {
   component: JSX.Element,
   description?: string,
   redirect?: any,
-  status?: number
+  status?: number,
+  chunk?: any
 }
 
 export interface Context {
-  insertCss?: any,
-  store?: any
-}
-
-export interface AppContext extends Context {
+  insertCss?: Function,
+  store?: any,
   next?: GeneratorFunction,
   path?: string,
   query?: any
