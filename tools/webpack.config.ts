@@ -21,15 +21,7 @@ const config = {
 
   module: {
     loaders: [
-      {
-        test: /\.tsx?$/,
-        loader: `awesome-typescript-loader?${JSON.stringify({
-          configFileName: 'tsconfig.webpack.json'
-        })}`,
-        include: [
-          path.resolve(__dirname, '../src')
-        ]
-      },
+
       {
         test: /\.css/,
         loaders: [
@@ -81,21 +73,9 @@ const config = {
     ]
   },
 
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        debug: isDebug,
-        context: __dirname,
-        output: {
-          path: path.join(__dirname, '../static')
-        }
-      }
-    })
-  ],
-
   resolve: {
     modules: [path.resolve(__dirname, '../src'), 'node_modules'],
-    extensions: ['.ts', '.tsx', '.json']
+    extensions: ['.ts', '.tsx', '.json', '.js', '.jsx']
   },
 
   cache: isDebug,
@@ -118,7 +98,7 @@ const config = {
 // -----------------------------------------------------------------------------
 
 const clientConfig = extend(true, {}, config, {
-  entry: './browser/index.ts',
+  entry: './browser/index.tsx',
 
   output: {
     filename: isDebug ? '[name].js?[chunkhash]' : '[name].[chunkhash].js',
@@ -157,6 +137,28 @@ const clientConfig = extend(true, {}, config, {
   ],
 
   devtool: isDebug ? 'source-map' : false
+})
+
+clientConfig.plugins.push(
+  new webpack.LoaderOptionsPlugin({
+    options: {
+      debug: isDebug,
+      context: __dirname,
+      output: {
+        path: path.join(__dirname, '../static')
+      }
+    }
+  })
+)
+
+clientConfig.module.loaders.push({
+  test: /\.tsx?$/,
+  loader: `awesome-typescript-loader?${JSON.stringify({
+    tsconfig: 'tools/config/tsconfig.client.json'
+  })}`,
+  include: [
+    path.resolve(__dirname, '../src')
+  ]
 })
 
 //
@@ -207,6 +209,28 @@ const serverConfig = extend(true, {}, config, {
   },
 
   devtool: 'source-map'
+})
+
+serverConfig.plugins.push(
+  new webpack.LoaderOptionsPlugin({
+    options: {
+      debug: isDebug,
+      context: __dirname,
+      output: {
+        path: path.join(__dirname, '../static')
+      }
+    }
+  })
+)
+
+serverConfig.module.loaders.push({
+  test: /\.tsx?$/,
+  loader: `awesome-typescript-loader?${JSON.stringify({
+    tsconfig: './tools/config/tsconfig.server.json'
+  })}`,
+  include: [
+    path.resolve(__dirname, '../src')
+  ]
 })
 
 export { clientConfig, serverConfig }

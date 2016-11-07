@@ -2,7 +2,7 @@ import * as fetch from 'isomorphic-fetch'
 
 export interface HelperConfig {
   cookie?: string,
-  history?: History
+  history?: HistoryModule.History
 }
 
 const createGraphqlRequest = (fetchKnowingCookie: any) => {

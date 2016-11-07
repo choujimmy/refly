@@ -2,9 +2,8 @@
   "compileOnSave": false,
   "buildOnSave": false,
   "compilerOptions": {
-    "outDir": "build",
-    "baseUrl": "src",
     "module": "commonjs",
+    "moduleResolution": "node",
     "target": "es5",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
