@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Universal react forum",
   "scripts": {
+    "flow": "flow",
     "lint:js": "eslint src scripts",
     "lint:css": "stylelint \"src/**/*.{css,less,scss,sss}\"",
     "lint": "npm run lint:js && npm run lint:css",
@@ -43,7 +44,9 @@
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.0",
+    "babel-loader": "^6.2.7",
     "babel-plugin-react-intl": "^2.2.0",
+    "babel-plugin-transform-flow-strip-types": "^6.18.0",
     "babel-plugin-transform-react-constant-elements": "^6.9.1",
     "babel-plugin-transform-react-inline-elements": "^6.8.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.2.10",
@@ -57,11 +60,13 @@
     "eslint-config-standard": "^6.2.1",
     "eslint-config-standard-jsx": "^3.2.0",
     "eslint-config-standard-react": "^4.2.0",
+    "eslint-plugin-flowtype": "^2.25.0",
     "eslint-plugin-promise": "^3.3.1",
     "eslint-plugin-react": "^6.6.0",
     "eslint-plugin-standard": "^2.0.1",
     "extend": "^3.0.0",
     "file-loader": "^0.9.0",
+    "flow-bin": "^0.34.0",
     "gaze": "^1.1.2",
     "glob": "^7.1.1",
     "isomorphic-style-loader": "^1.1.0",
@@ -75,12 +80,16 @@
     "rimraf": "^2.5.4",
     "sass-loader": "^4.0.2",
     "source-map-support": "^0.4.6",
+    "stylelint": "^7.5.0",
+    "stylelint-config-standard": "^14.0.0",
     "url-loader": "^0.5.7",
     "webpack": "beta",
     "webpack-hot-middleware": "^2.13.1",
     "webpack-middleware": "^1.5.1"
   },
   "dependencies": {
+    "intl": "^1.2.5",
+    "intl-locales-supported": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",
     "koa": "next",
     "react": "^15.3.2",
@@ -92,6 +101,9 @@
       "latest",
       "react",
       "stage-0"
+    ],
+    "plugins": [
+      "transform-flow-strip-types"
     ]
   },
   "eslintConfig": {
@@ -100,6 +112,9 @@
       "standard",
       "standard-react",
       "standard-jsx"
+    ],
+    "plugins": [
+      "flowtype"
     ],
     "env": {
       "es6": true,

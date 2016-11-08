@@ -1,16 +1,16 @@
+/* @flow */
 import browserSync from 'browser-sync'
 import webpack from 'webpack'
 import webpackMiddleware from 'webpack-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import run from './run'
 import server from './server'
-import webpackConfig from './webpack.config'
+import { clientConfig, serverConfig } from './webpack.config'
 import clean from './clean'
-import messages from './messages'
+import message from './message'
 import copy from './copy'
 
 process.argv.push('--watch')
-const [config] = webpackConfig
 
 /*
  * 运行开发环境web服务器
@@ -18,24 +18,24 @@ const [config] = webpackConfig
  */
 const start = async () => {
   await run(clean)
-  await run(messages)
+  await run(message)
   await run(copy)
   await new Promise(resolve => {
-    // Hot Module Replacement (HMR) + React Hot Reload
-    if (config.debug) {
-      config.entry = ['react-hot-loader/patch', 'webpack-hot-middleware/client', config.entry]
-      config.output.filename = config.output.filename.replace('[chunkhash]', '[hash]')
-      config.output.chunkFilename = config.output.chunkFilename.replace('[chunkhash]', '[hash]')
-      config.module.loaders.find(x => x.loader === 'babel-loader')
+    // 启用 Hot Module Replacement (HMR) 以及 React Hot Reload
+    if (clientConfig.cache) {
+      clientConfig.entry = ['react-hot-loader/patch', 'webpack-hot-middleware/client', clientConfig.entry]
+      clientConfig.output.filename = clientConfig.output.filename.replace('[chunkhash]', '[hash]')
+      clientConfig.output.chunkFilename = clientConfig.output.chunkFilename.replace('[chunkhash]', '[hash]')
+      clientConfig.module.loaders.find(x => x.loader === 'babel-loader')
         .query.plugins.unshift('react-hot-loader/babel')
-      config.plugins.push(new webpack.HotModuleReplacementPlugin())
-      config.plugins.push(new webpack.NoErrorsPlugin())
+      clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
+      clientConfig.plugins.push(new webpack.NoErrorsPlugin())
     }
 
-    const bundler = webpack(webpackConfig)
+    const bundler = webpack([clientConfig, serverConfig])
     const wpMiddleware = webpackMiddleware(bundler, {
-      publicPath: config.output.publicPath,
-      stats: config.stats
+      publicPath: clientConfig.output.publicPath,
+      stats: clientConfig.stats
     })
     const hotMiddleware = webpackHotMiddleware(bundler.compilers[0])
 
@@ -46,7 +46,7 @@ const start = async () => {
       const bs = browserSync.create()
 
       bs.init({
-        ...(config.debug ? {} : { notify: false, ui: false }),
+        ...(clientConfig.cache ? {} : { notify: false, ui: false }),
         open: false,
         proxy: {
           target: serverInstance.host,

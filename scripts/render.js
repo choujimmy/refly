@@ -1,3 +1,4 @@
+/* @flow */
 import path from 'path'
 import fetch from 'isomorphic-fetch'
 import server from './server'

@@ -1,3 +1,4 @@
+/* @flow */
 import path from 'path'
 import gaze from 'gaze'
 import { transform } from 'babel-core'
@@ -92,7 +93,7 @@ const updateMessages = async (toBuild) => {
   )
 }
 
-const extractMessages = async () => {
+const message = async () => {
   const compare = (a, b) => {
     if (a === b) {
       return 0
@@ -138,4 +139,4 @@ const extractMessages = async () => {
   }
 }
 
-export default extractMessages
+export default message

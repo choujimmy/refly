@@ -1,3 +1,4 @@
+/* @flow */
 import path from 'path'
 import webpack from 'webpack'
 import extend from 'extend'
@@ -38,6 +39,7 @@ const config = {
           ],
           plugins: [
             'transform-runtime',
+            'transform-flow-strip-types',
             ...isDebug ? [
               'transform-react-jsx-source',
               'transform-react-jsx-self'
@@ -242,4 +244,4 @@ serverConfig.plugins.push(new webpack.LoaderOptionsPlugin({
   }
 }))
 
-export default [clientConfig, serverConfig]
+export { clientConfig, serverConfig }

@@ -1,3 +1,4 @@
+/* @flow */
 import { cleanDir } from './lib/fs'
 
 /**

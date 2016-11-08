@@ -1,3 +1,4 @@
+/* @flow */
 import path from 'path'
 import gaze from 'gaze'
 import { writeFile, copyFile, makeDir, copyDir, cleanDir } from './lib/fs'

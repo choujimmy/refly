@@ -1,11 +1,13 @@
+/* @flow */
 import path from 'path'
 import cp from 'child_process'
-import webpackConfig from './webpack.config'
+import { serverConfig } from './webpack.config'
+import { ServerInstance } from './types/process'
 
 const RUNNING_REGEXP = /服务启动成功, 侦听地址 http:\/\/(.*?)\//
 
-let serverInstance
-const { output } = webpackConfig.find(x => x.target === 'node')
+let serverInstance: ServerInstance
+const { output } = serverConfig
 const serverPath = path.join(output.path, output.filename)
 
 // 运行或者重启nodejs服务端
@@ -25,7 +27,7 @@ const server = () => {
         serverInstance.stdout.removeListener('data', onStdOut)
         serverInstance.stdout.on('data', x => process.stdout.write(x))
         pending = false
-        resolve(server)
+        resolve(serverInstance)
       }
     }
 
