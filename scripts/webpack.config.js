@@ -2,7 +2,6 @@ import path from 'path'
 import webpack from 'webpack'
 import extend from 'extend'
 import AssetsPlugin from 'assets-webpack-plugin'
-import autoprefixer from 'autoprefixer'
 
 const INTL_REQUIRE_DESCRIPTIONS = true
 
@@ -106,18 +105,6 @@ const config = {
     ]
   },
 
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        debug: isDebug,
-        context: __dirname,
-        output: {
-          path: path.join(__dirname, '../static')
-        }
-      }
-    })
-  ],
-
   resolve: {
     modules: [path.resolve(__dirname, '../src'), 'node_modules'],
     extensions: ['.webpack.js', '.web.js', '.js', '.jsx', '.json']
@@ -143,7 +130,7 @@ const config = {
 // -----------------------------------------------------------------------------
 
 const clientConfig = extend(true, {}, config, {
-  entry: './clientLoader.js',
+  entry: './browser/index.js',
 
   output: {
     filename: isDebug ? '[name].js?[chunkhash]' : '[name].[chunkhash].js',
@@ -185,12 +172,22 @@ const clientConfig = extend(true, {}, config, {
   devtool: isDebug ? 'source-map' : false
 })
 
+clientConfig.plugins.push(new webpack.LoaderOptionsPlugin({
+  options: {
+    debug: isDebug,
+    context: __dirname,
+    output: {
+      path: path.join(__dirname, '../static')
+    }
+  }
+}))
+
 //
 // 服务端配置部分
 // -----------------------------------------------------------------------------
 
 const serverConfig = extend(true, {}, config, {
-  entry: './server.js',
+  entry: './server/index.js',
 
   output: {
     filename: '../../server.js',
@@ -234,5 +231,15 @@ const serverConfig = extend(true, {}, config, {
 
   devtool: 'source-map'
 })
+
+serverConfig.plugins.push(new webpack.LoaderOptionsPlugin({
+  options: {
+    debug: isDebug,
+    context: __dirname,
+    output: {
+      path: path.join(__dirname, '../static')
+    }
+  }
+}))
 
 export default [clientConfig, serverConfig]

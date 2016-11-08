@@ -35,10 +35,7 @@ const start = async () => {
     const bundler = webpack(webpackConfig)
     const wpMiddleware = webpackMiddleware(bundler, {
       publicPath: config.output.publicPath,
-      // Pretty colored output
       stats: config.stats
-      // For other settings see
-      // https://webpack.github.io/docs/webpack-dev-middleware
     })
     const hotMiddleware = webpackHotMiddleware(bundler.compilers[0])
 
