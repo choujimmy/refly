@@ -9,6 +9,19 @@ const INTL_REQUIRE_DESCRIPTIONS = true
 const isDebug = !process.argv.includes('--release')
 const isVerbose = process.argv.includes('--verbose')
 
+const loaderOptionsPlugin = new webpack.LoaderOptionsPlugin({
+  options: {
+    debug: isDebug,
+    context: __dirname,
+    output: {
+      path: path.join(__dirname, '../static')
+    },
+    postcss: (bundler) => [
+      require('autoprefixer')({ browsers: ['last 2 versions'] })
+    ]
+  }
+})
+
 //
 // webpack客户端和服务端打包公共部分
 // -----------------------------------------------------------------------------
@@ -174,15 +187,7 @@ const clientConfig = extend(true, {}, config, {
   devtool: isDebug ? 'source-map' : false
 })
 
-clientConfig.plugins.push(new webpack.LoaderOptionsPlugin({
-  options: {
-    debug: isDebug,
-    context: __dirname,
-    output: {
-      path: path.join(__dirname, '../static')
-    }
-  }
-}))
+clientConfig.plugins.push(loaderOptionsPlugin)
 
 //
 // 服务端配置部分
@@ -234,14 +239,6 @@ const serverConfig = extend(true, {}, config, {
   devtool: 'source-map'
 })
 
-serverConfig.plugins.push(new webpack.LoaderOptionsPlugin({
-  options: {
-    debug: isDebug,
-    context: __dirname,
-    output: {
-      path: path.join(__dirname, '../static')
-    }
-  }
-}))
+serverConfig.plugins.push(loaderOptionsPlugin)
 
 export { clientConfig, serverConfig }

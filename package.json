@@ -88,13 +88,30 @@
     "webpack-middleware": "^1.5.1"
   },
   "dependencies": {
+    "bluebird": "^3.4.6",
+    "graphql": "^0.7.2",
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",
     "koa": "next",
+    "koa-bodyparser": "next",
+    "koa-convert": "^1.2.0",
+    "koa-graphql": "^0.5.6",
+    "koa-jwt": "koa2",
+    "koa-mount": "next",
+    "koa-passport": "next",
+    "koa-request-language": "^1.0.1",
+    "koa-session": "^3.4.0",
+    "koa-static": "next",
+    "normalize-scss": "^6.0.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "react-intl": "^2.1.5"
+    "react-intl": "^2.1.5",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.7.4",
+    "redux-thunk": "^2.1.0",
+    "serialize-javascript": "^1.3.0",
+    "universal-router": "^2.0.0"
   },
   "babel": {
     "presets": [

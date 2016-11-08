@@ -1,4 +1,11 @@
 [ignore]
 .*/build
 
-[include]
+[libs]
+./interfaces/global.d.js
+./interfaces/constant.d.js
+
+[options]
+module.name_mapper='.*\(.scss\)' -> 'CSSModule'
+module.name_mapper.extension='png' -> 'ImageModule'
+module.name_mapper='./assets' -> 'WebpackAssets'
