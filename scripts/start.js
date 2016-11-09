@@ -3,6 +3,7 @@ import browserSync from 'browser-sync'
 import webpack from 'webpack'
 import webpackMiddleware from 'webpack-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
+import compression from 'compression'
 
 import run from './run'
 import server from './server'
@@ -23,17 +24,6 @@ const start = async () => {
   await run(message)
   await run(copy)
   await new Promise(resolve => {
-    // 启用 Hot Module Replacement (HMR) 以及 React Hot Reload
-    if (clientConfig.cache) {
-      clientConfig.entry = ['react-hot-loader/patch', 'webpack-hot-middleware/client', clientConfig.entry]
-      clientConfig.output.filename = clientConfig.output.filename.replace('[chunkhash]', '[hash]')
-      clientConfig.output.chunkFilename = clientConfig.output.chunkFilename.replace('[chunkhash]', '[hash]')
-      clientConfig.module.loaders.find(x => x.loader === 'babel-loader')
-        .query.plugins.unshift('react-hot-loader/babel')
-      clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
-      clientConfig.plugins.push(new webpack.NoErrorsPlugin())
-    }
-
     const bundler = webpack([clientConfig, serverConfig])
     const wpMiddleware = webpackMiddleware(bundler, {
       publicPath: clientConfig.output.publicPath,
@@ -47,14 +37,20 @@ const start = async () => {
       const serverInstance = await server()
       const bs = browserSync.create()
 
-      bs.init({
+      const bsOption = {
         ...(clientConfig.cache ? {} : { notify: false, ui: false }),
         open: false,
         proxy: {
           target: serverInstance.host,
           middleware: [wpMiddleware, hotMiddleware]
         }
-      }, resolve)
+      }
+
+      if (process.argv.includes('--compress')) {
+        bsOption.proxy.middleware.unshift(compression())
+      }
+
+      bs.init(bsOption, resolve)
     }
 
     bundler.plugin('done', stats => handleBundleComplete(stats))

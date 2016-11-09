@@ -30,7 +30,6 @@ global.navigator.userAgent = global.navigator.userAgent || 'all'
 app.use(serve(path.join(__dirname, 'public'), {
   maxage: 31536000 * 1000
 }))
-
 //
 // 多语言部分
 // -----------------------------------------------------------------------------

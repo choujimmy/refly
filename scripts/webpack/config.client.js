@@ -8,15 +8,21 @@ const isVerbose = process.argv.includes('--verbose')
 
 const config = {
   context: path.resolve(__dirname, '../../src'),
-  entry: './browser/index.js',
+  entry: [
+    './browser/index.js',
+    ...isDebug ? [
+      'react-hot-loader/patch',
+      'webpack-hot-middleware/client'
+    ] : []
+  ],
   target: 'web',
   devtool: isDebug ? 'source-map' : false,
   output: {
     path: path.resolve(__dirname, '../../build/public/assets'),
     publicPath: '/assets/',
     sourcePrefix: '  ',
-    filename: isDebug ? '[name].js?[chunkhash]' : '[name].[chunkhash].js',
-    chunkFilename: isDebug ? '[name].[id].js?[chunkhash]' : '[name].[id].[chunkhash].js'
+    filename: isDebug ? '[name].js?[chunkhash]' : '[name].[hash].js',
+    chunkFilename: isDebug ? '[name].[id].js?[chunkhash]' : '[name].[id].[hash].js'
   },
   resolve: {
     modules: [path.resolve(__dirname, '../../src'), 'node_modules'],
@@ -59,6 +65,7 @@ const config = {
             'transform-runtime',
             'transform-flow-strip-types',
             ...isDebug ? [
+              'react-hot-loader/babel',
               'transform-react-jsx-source',
               'transform-react-jsx-self'
             ] : [
@@ -154,10 +161,11 @@ const config = {
 
     new webpack.optimize.OccurrenceOrderPlugin(true),
 
-    ...isDebug ? [] : [
-
+    ...isDebug ? [
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin()
+    ] : [
       new webpack.optimize.DedupePlugin(),
-
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           screw_ie8: true,
