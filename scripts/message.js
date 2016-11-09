@@ -5,7 +5,7 @@ import { transform } from 'babel-core'
 
 import { readFile, writeFile, glob } from './lib/fs'
 import pkg from '../package.json'
-import { locales } from '../src/server/config'
+import { locales } from '../src/common/config'
 
 const GLOB_PATTERN = 'src/**/*.{js,jsx}'
 const fileToMessages = {}

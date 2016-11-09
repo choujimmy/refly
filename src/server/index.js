@@ -12,7 +12,8 @@ import graphqlHTTP from 'koa-graphql'
 import jwt from 'koa-jwt'
 
 import './intl/polyfill'
-import { port, auth, locales } from './config'
+import { port, locales } from '../common/config'
+import { auth } from './secret'
 import schema from './schema'
 import { render } from './render'
 

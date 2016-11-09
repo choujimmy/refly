@@ -1,6 +1,6 @@
 /* @flow */
 import fetch from 'isomorphic-fetch'
-import { host } from '../../server/config'
+import { host } from '../config'
 
 let fetchPolyfill
 

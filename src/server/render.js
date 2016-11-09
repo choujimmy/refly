@@ -11,7 +11,7 @@ import routes from '../browser/routes'
 import configureStore from '../common/store/configureStore'
 import { setRuntimeVariable } from '../common/actions/runtime'
 import { setLocale } from '../common/actions/intl'
-import { locales } from './config'
+import { locales } from '../common/config'
 
 const assets = JSON.parse(readFileSync(`${__dirname}/assets.json`, 'utf-8'))
 

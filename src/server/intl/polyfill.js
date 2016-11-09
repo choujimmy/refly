@@ -1,7 +1,7 @@
 /* @flow */
 import areIntlLocalesSupported from 'intl-locales-supported'
 
-import { locales } from '../config'
+import { locales } from '../../common/config'
 
 if (global.Intl) {
   if (!areIntlLocalesSupported(locales)) {

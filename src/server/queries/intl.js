@@ -7,7 +7,7 @@ import {
 } from 'graphql'
 
 import IntlMessageType from '../types/IntlMessage'
-import { locales } from '../config'
+import { locales } from '../../common/config'
 import { readFile } from '../utils/fs'
 
 const CONTENT_DIR = join(__dirname, './messages')
