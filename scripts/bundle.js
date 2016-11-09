@@ -1,6 +1,7 @@
 /* @flow */
 import webpack from 'webpack'
-import { clientConfig, serverConfig } from './webpack.config'
+import clientConfig from './webpack/config.client'
+import serverConfig from './webpack/config.server'
 
 /**
  * 从源代码创建应用程序打包文件

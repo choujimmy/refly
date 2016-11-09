@@ -11,6 +11,17 @@ const run = () => {
 }
 
 if (!global.Intl) {
+  Promise.all([
+    System.import('intl'),
+    System.import('intl/locale-data/jsonp/en.js'),
+    System.import('intl/locale-data/jsonp/zh.js')
+  ]).then((modules) => {
+    modules[0].default
+    modules[1].default
+    modules[2].default
+    run()
+  })
+  /*
   require.ensure([
     'intl',
     'intl/locale-data/jsonp/en.js',
@@ -21,6 +32,7 @@ if (!global.Intl) {
     require('intl/locale-data/jsonp/zh.js')
     run()
   }, 'polyfills')
+  */
 } else {
   run()
 }

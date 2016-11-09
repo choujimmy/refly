@@ -1,37 +1,38 @@
 /* @flow */
 import path from 'path'
 import webpack from 'webpack'
-import extend from 'extend'
 import AssetsPlugin from 'assets-webpack-plugin'
-
-const INTL_REQUIRE_DESCRIPTIONS = true
 
 const isDebug = !process.argv.includes('--release')
 const isVerbose = process.argv.includes('--verbose')
 
-const loaderOptionsPlugin = new webpack.LoaderOptionsPlugin({
-  options: {
-    debug: isDebug,
-    context: __dirname,
-    output: {
-      path: path.join(__dirname, '../static')
-    },
-    postcss: (bundler) => [
-      require('autoprefixer')({ browsers: ['last 2 versions'] })
-    ]
-  }
-})
-
-//
-// webpack客户端和服务端打包公共部分
-// -----------------------------------------------------------------------------
 const config = {
-  context: path.resolve(__dirname, '../src'),
-
+  context: path.resolve(__dirname, '../../src'),
+  entry: './browser/index.js',
+  target: 'web',
+  devtool: isDebug ? 'source-map' : false,
   output: {
-    path: path.resolve(__dirname, '../build/public/assets'),
+    path: path.resolve(__dirname, '../../build/public/assets'),
     publicPath: '/assets/',
-    sourcePrefix: '  '
+    sourcePrefix: '  ',
+    filename: isDebug ? '[name].js?[chunkhash]' : '[name].[chunkhash].js',
+    chunkFilename: isDebug ? '[name].[id].js?[chunkhash]' : '[name].[id].[chunkhash].js'
+  },
+  resolve: {
+    modules: [path.resolve(__dirname, '../../src'), 'node_modules'],
+    extensions: ['.webpack.js', '.web.js', '.js', '.jsx', '.json']
+  },
+  cache: isDebug,
+  stats: {
+    colors: true,
+    reasons: isDebug,
+    hash: isVerbose,
+    version: isVerbose,
+    timings: true,
+    chunks: isVerbose,
+    chunkModules: isVerbose,
+    cached: isVerbose,
+    cachedAssets: isVerbose
   },
 
   module: {
@@ -40,14 +41,18 @@ const config = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         include: [
-          path.resolve(__dirname, '../src')
+          path.resolve(__dirname, '../../src')
         ],
         query: {
           cacheDirectory: isDebug,
           babelrc: false,
           presets: [
             'react',
-            'latest',
+            ['latest', {
+              es2015: {
+                modules: false
+              }
+            }],
             'stage-0'
           ],
           plugins: [
@@ -63,7 +68,7 @@ const config = {
             ],
             ['react-intl',
               {
-                enforceDescriptions: INTL_REQUIRE_DESCRIPTIONS
+                enforceDescriptions: true
               }
             ]
           ]
@@ -120,41 +125,20 @@ const config = {
     ]
   },
 
-  resolve: {
-    modules: [path.resolve(__dirname, '../src'), 'node_modules'],
-    extensions: ['.webpack.js', '.web.js', '.js', '.jsx', '.json']
-  },
-
-  cache: isDebug,
-
-  stats: {
-    colors: true,
-    reasons: isDebug,
-    hash: isVerbose,
-    version: isVerbose,
-    timings: true,
-    chunks: isVerbose,
-    chunkModules: isVerbose,
-    cached: isVerbose,
-    cachedAssets: isVerbose
-  }
-}
-
-//
-// 客户端配置部分
-// -----------------------------------------------------------------------------
-
-const clientConfig = extend(true, {}, config, {
-  entry: './browser/index.js',
-
-  output: {
-    filename: isDebug ? '[name].js?[chunkhash]' : '[name].[chunkhash].js',
-    chunkFilename: isDebug ? '[name].[id].js?[chunkhash]' : '[name].[id].[chunkhash].js'
-  },
-
-  target: 'web',
-
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        debug: isDebug,
+        context: __dirname,
+        output: {
+          path: path.join(__dirname, '../../static')
+        },
+        postcss: (bundler) => [
+          require('autoprefixer')({ browsers: ['last 2 versions'] })
+        ]
+      }
+    }),
+
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
       'process.env.BROWSER': true,
@@ -164,7 +148,7 @@ const clientConfig = extend(true, {}, config, {
     // 使用assets-webpack-plugin插件生成包含文件的路径json文件
     // https://github.com/sporto/assets-webpack-plugin#options
     new AssetsPlugin({
-      path: path.resolve(__dirname, '../build'),
+      path: path.resolve(__dirname, '../../build'),
       filename: 'assets.json'
     }),
 
@@ -181,63 +165,7 @@ const clientConfig = extend(true, {}, config, {
         }
       })
     ]
-  ],
+  ]
+}
 
-  devtool: isDebug ? 'source-map' : false
-})
-
-clientConfig.plugins.push(loaderOptionsPlugin)
-
-//
-// 服务端配置部分
-// -----------------------------------------------------------------------------
-
-const serverConfig = extend(true, {}, config, {
-  entry: './server/index.js',
-
-  output: {
-    filename: '../../server.js',
-    libraryTarget: 'commonjs2'
-  },
-
-  target: 'node',
-
-  externals: [
-    /^\.\/assets$/,
-    (context, request, callback) => {
-      const isExternal =
-        request.match(/^[@a-z][a-z/.\-0-9]*$/i) &&
-        !request.match(/\.(css|less|scss|sss)$/i)
-      callback(null, Boolean(isExternal))
-    }
-  ],
-
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
-      'process.env.BROWSER': false,
-      __DEV__: isDebug
-    }),
-    new webpack.BannerPlugin({
-      banner: 'require("source-map-support").install()',
-      raw: true,
-      entryOnly: false
-    }),
-    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 })
-  ],
-
-  node: {
-    console: false,
-    global: false,
-    process: false,
-    Buffer: false,
-    __filename: false,
-    __dirname: false
-  },
-
-  devtool: 'source-map'
-})
-
-serverConfig.plugins.push(loaderOptionsPlugin)
-
-export { clientConfig, serverConfig }
+export default config

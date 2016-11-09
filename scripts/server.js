@@ -1,7 +1,7 @@
 /* @flow */
 import path from 'path'
 import cp from 'child_process'
-import { serverConfig } from './webpack.config'
+import serverConfig from './webpack/config.server'
 import { ServerInstance } from './types/process.d'
 
 const RUNNING_REGEXP = /服务启动成功, 侦听地址 http:\/\/(.*?)\//

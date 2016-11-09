@@ -4,7 +4,6 @@ import gaze from 'gaze'
 import { transform } from 'babel-core'
 
 import { readFile, writeFile, glob } from './lib/fs'
-import pkg from '../package.json'
 import { locales } from '../src/common/config'
 
 const GLOB_PATTERN = 'src/**/*.{js,jsx}'
@@ -109,8 +108,8 @@ const message = async () => {
       const code = await readFile(fileName)
       const posixName = posixPath(fileName)
       const result = transform(code, {
-        presets: pkg.babel.presets,
-        plugins: ['react-intl']
+        presets: ['latest', 'stage-0', 'react'],
+        plugins: ['react-intl', 'transform-flow-strip-types']
       }).metadata['react-intl']
       if (result.messages && result.messages.length) {
         fileToMessages[posixName] = result.messages.sort(compareMessages)
