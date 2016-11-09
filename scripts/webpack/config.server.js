@@ -38,7 +38,7 @@ const config = {
 
   externals: [
     /^\.\/assets$/,
-    (context, request, callback) => {
+    (context: any, request: string, callback: Function) => {
       const isExternal =
         request.match(/^[@a-z][a-z/.\-0-9]*$/i) &&
         !request.match(/\.(css|less|scss|sss)$/i)

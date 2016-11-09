@@ -21,7 +21,7 @@ const config = {
     path: path.resolve(__dirname, '../../build/public/assets'),
     publicPath: '/assets/',
     sourcePrefix: '  ',
-    filename: isDebug ? '[name].js?[chunkhash]' : '[name].[hash].js',
+    filename: isDebug ? '[name].js?[hash]' : '[name].[hash].js',
     chunkFilename: isDebug ? '[name].[id].js?[chunkhash]' : '[name].[id].[hash].js'
   },
   resolve: {
