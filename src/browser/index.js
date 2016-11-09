@@ -1,1 +1,26 @@
-console.log('client')
+/* @flow */
+import render from './render'
+
+const run = () => {
+  // 当整个页面的dom tree ready以及内容加载完毕后执行
+  if (['complete', 'loaded', 'interactive'].includes(document.readyState) && document.body) {
+    render()
+  } else {
+    document.addEventListener('DOMContentLoaded', render, false)
+  }
+}
+
+if (!global.Intl) {
+  require.ensure([
+    'intl',
+    'intl/locale-data/jsonp/en.js',
+    'intl/locale-data/jsonp/zh.js'
+  ], require => {
+    require('intl')
+    require('intl/locale-data/jsonp/en.js')
+    require('intl/locale-data/jsonp/zh.js')
+    run()
+  }, 'polyfills')
+} else {
+  run()
+}

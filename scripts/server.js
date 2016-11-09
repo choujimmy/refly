@@ -16,10 +16,8 @@ const server = (): Promise<ServerInstance> => {
     let pending = true
 
     const onStdOut = (data) => {
-      const time = new Date().toTimeString()
       const match = data.toString('utf8').match(RUNNING_REGEXP)
 
-      process.stdout.write(time.replace(/.*(\d{2}:\d{2}:\d{2}).*/, '[$1] '))
       process.stdout.write(data)
 
       if (match) {
