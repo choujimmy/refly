@@ -100,7 +100,7 @@
     "koa-jwt": "koa2",
     "koa-mount": "next",
     "koa-passport": "next",
-    "koa-request-language": "^1.0.1",
+    "koa-request-language": "^1.0.2",
     "koa-session": "^3.4.0",
     "koa-static": "next",
     "normalize-scss": "^6.0.0",
@@ -113,41 +113,5 @@
     "redux-thunk": "^2.1.0",
     "serialize-javascript": "^1.3.0",
     "universal-router": "^2.0.0"
-  },
-  "babel": {
-    "presets": [
-      "latest",
-      "react",
-      "stage-0"
-    ],
-    "plugins": [
-      "transform-flow-strip-types"
-    ]
-  },
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "extends": [
-      "standard",
-      "standard-react",
-      "standard-jsx"
-    ],
-    "plugins": [
-      "flowtype"
-    ],
-    "env": {
-      "es6": true,
-      "node": true,
-      "browser": false
-    },
-    "rules": {},
-    "globals": {
-      "__DEV__": true
-    },
-    "ignores": [
-      "build"
-    ]
-  },
-  "stylelint": {
-    "extends": "stylelint-config-standard"
   }
 }
