@@ -36,8 +36,7 @@ const server = (): Promise<ServerInstance> => {
     }
 
     serverInstance = cp.spawn('node', [serverPath], {
-      env: Object.assign({ NODE_ENV: 'development' }, process.env),
-      silent: false
+      env: Object.assign({ NODE_ENV: 'development' }, process.env)
     })
 
     if (pending) {

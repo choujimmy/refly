@@ -1,9 +1,9 @@
 /* @flow */
 import React, { PropTypes, Children } from 'react'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
-import style from './Layout.scss'
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
+import style from './style.scss'
+import Header from '../Header'
+import Footer from '../Footer'
 
 class Layout extends React.Component {
   static propTypes = {

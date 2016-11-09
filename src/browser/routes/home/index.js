@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react'
 import Home from './Home'
-import { Page } from '../type'
+import { Page } from '../../types/route.d'
 
 export default {
 

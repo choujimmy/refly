@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react'
 import NotFound from './NotFound'
-import { Page } from '../type'
+import { Page } from '../../types/route.d'
 
 const title = 'Page Not Found'
 

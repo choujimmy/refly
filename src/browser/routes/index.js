@@ -1,5 +1,5 @@
 /* @flow */
-import { Page, Context } from './type'
+import { Page, Context } from '../types/route.d'
 
 export default {
 

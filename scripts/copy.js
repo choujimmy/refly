@@ -18,6 +18,7 @@ const copy = async () => {
         start: 'node server.js'
       }
     }, null, 2)),
+    copyFile('LICENSE', 'build/LICENSE'),
     copyDir('src/common/public', 'build/public'),
     copyDir('src/common/messages', 'build/messages')
   ])

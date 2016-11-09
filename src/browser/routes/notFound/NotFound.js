@@ -1,7 +1,7 @@
 /* @flow */
 import React, { PropTypes } from 'react'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
-import Layout from '../../components/Layout/Layout'
+import Layout from '../../components/Layout'
 import style from './NotFound.scss'
 
 class NotFound extends React.Component {
