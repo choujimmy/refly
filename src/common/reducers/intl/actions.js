@@ -3,7 +3,7 @@ import {
   SET_LOCALE_START,
   SET_LOCALE_SUCCESS,
   SET_LOCALE_ERROR
-} from '../reducers/intl'
+} from './reducer'
 
 const query = `
   query ($locale:String!) {
@@ -18,9 +18,7 @@ const setLocale = (locale: string) => {
   return async (dispatch: Function, getState: Function, { graphqlRequest }: Object) => {
     dispatch({
       type: SET_LOCALE_START,
-      payload: {
-        locale
-      }
+      payload: locale
     })
 
     try {

@@ -11,11 +11,12 @@ import createBrowserHistory from 'history/createBrowserHistory'
 import App from './components/App'
 import configureStore from '../common/store/configureStore'
 import { updateMeta } from './utils/meta'
+import { fromJSON } from '../common/core/transit'
 
 [en, zh].forEach(addLocaleData)
 
 const history = createBrowserHistory()
-const store = configureStore(window.APP_STATE, { history })
+const store = configureStore(fromJSON(window.__INITIAL_STATE__), { history })
 const context = {
   insertCss: (...styles) => {
     const removeCss = styles.map(x => x._insertCss())
@@ -37,12 +38,8 @@ let onRenderComplete = () => {
   onRenderComplete = (route, location) => {
     document.title = route.title
 
+    // 更新需要的页面头部标签
     updateMeta('description', route.description)
-    // 更新需要的页面头部标签, 例如:
-    // updateMeta('keywords', route.keywords)
-    // updateCustomMeta('og:url', route.canonicalUrl)
-    // updateCustomMeta('og:image', route.imageUrl)
-    // updateLink('canonical', route.canonicalUrl)
 
     let scrollX = 0
     let scrollY = 0

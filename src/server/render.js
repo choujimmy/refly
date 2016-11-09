@@ -9,8 +9,8 @@ import App from '../browser/components/App'
 import Html from './Html'
 import routes from '../browser/routes'
 import configureStore from '../common/store/configureStore'
-import { setRuntimeVariable } from '../common/actions/runtime'
-import { setLocale } from '../common/actions/intl'
+import { setInitialNow, setAvailableLocales } from '../common/reducers/runtime/actions'
+import { setLocale } from '../common/reducers/intl/actions'
 import { locales } from '../common/config'
 
 const assets = JSON.parse(readFileSync(`${__dirname}/assets.json`, 'utf-8'))
@@ -24,8 +24,8 @@ const render = () => {
         cookie: ctx.headers['cookie']
       })
 
-      store.dispatch(setRuntimeVariable('initialNow', Date.now()))
-      store.dispatch(setRuntimeVariable('availableLocales', locales))
+      store.dispatch(setInitialNow(Date.now()))
+      store.dispatch(setAvailableLocales(locales))
 
       const locale = ctx.state.language
       await store.dispatch(setLocale(locale))
