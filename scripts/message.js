@@ -104,7 +104,7 @@ const message = async () => {
 
   const compareMessages = (a, b) => compare(a.id, b.id)
 
-  const processFile = async (fileName) => {
+  const processFile = async (fileName: string) => {
     try {
       const code = await readFile(fileName)
       const posixName = posixPath(fileName)

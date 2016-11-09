@@ -1,18 +1,16 @@
 /* @flow */
-import fs from 'fs'
 import { join } from 'path'
-import Promise from 'bluebird'
 import {
   GraphQLList as List,
   GraphQLString as StringType,
   GraphQLNonNull as NonNull
 } from 'graphql'
+
 import IntlMessageType from '../types/IntlMessage'
 import { locales } from '../config'
+import { readFile } from '../utils/fs'
 
 const CONTENT_DIR = join(__dirname, './messages')
-
-const readFile = Promise.promisify(fs.readFile)
 
 const intl = {
   type: new List(IntlMessageType),

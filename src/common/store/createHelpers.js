@@ -1,6 +1,5 @@
 /* @flow */
-import fetch from 'isomorphic-fetch'
-
+import fetch from '../core/fetch'
 import { HelpersConfig } from '../types/helper.d'
 
 const createGraphqlRequest = (fetchKnowingCookie) => {

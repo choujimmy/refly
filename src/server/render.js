@@ -3,15 +3,17 @@ import Koa from 'koa'
 import React from 'react'
 import ReactDOM from 'react-dom/server'
 import UniversalRouter from 'universal-router'
+import { readFileSync } from 'fs'
 
 import App from '../browser/components/App'
 import Html from './Html'
 import routes from '../browser/routes'
-import assets from './assets'
 import configureStore from '../common/store/configureStore'
 import { setRuntimeVariable } from '../common/actions/runtime'
 import { setLocale } from '../common/actions/intl'
 import { locales } from './config'
+
+const assets = JSON.parse(readFileSync(`${__dirname}/assets.json`, 'utf-8'))
 
 const render = () => {
   return async (ctx: Koa.context, next: Function) => {
@@ -22,15 +24,8 @@ const render = () => {
         cookie: ctx.headers['cookie']
       })
 
-      store.dispatch(setRuntimeVariable({
-        name: 'initialNow',
-        value: Date.now()
-      }))
-
-      store.dispatch(setRuntimeVariable({
-        name: 'availableLocales',
-        value: locales
-      }))
+      store.dispatch(setRuntimeVariable('initialNow', Date.now()))
+      store.dispatch(setRuntimeVariable('availableLocales', locales))
 
       const locale = ctx.state.language
       await store.dispatch(setLocale(locale))

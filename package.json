@@ -88,7 +88,6 @@
     "webpack-middleware": "^1.5.1"
   },
   "dependencies": {
-    "bluebird": "^3.4.6",
     "graphql": "^0.7.2",
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.0.0",
