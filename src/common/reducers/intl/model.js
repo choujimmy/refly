@@ -1,9 +1,7 @@
 /* @flow */
-import { Map } from 'immutable'
+import { Map, Record as ImmutableRecord } from 'immutable'
 
-import { Record as TransitRecord } from '../../core/transit'
-
-export class Record extends TransitRecord({
+export class Record extends ImmutableRecord({
   initialNow: Date.now(),
   locale: null,
   newLocale: null,

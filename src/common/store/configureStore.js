@@ -5,9 +5,9 @@ import logger from 'redux-logger'
 
 import rootReducer from '../reducers'
 import createHelpers from './createHelpers'
-import { HelpersConfig } from '../types/helper.d'
+import type { HelpersConfig } from '../types/helper.d'
 
-export default function configureStore (initialState: Object, helpersConfig: HelpersConfig) {
+export default function configureStore (initialState: any, helpersConfig: HelpersConfig) {
   const helpers = createHelpers(helpersConfig)
   const middleware = [thunk.withExtraArgument(helpers)]
 

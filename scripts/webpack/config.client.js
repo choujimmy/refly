@@ -153,7 +153,6 @@ const config = {
     }),
 
     // 使用assets-webpack-plugin插件生成包含文件的路径json文件
-    // https://github.com/sporto/assets-webpack-plugin#options
     new AssetsPlugin({
       path: path.resolve(__dirname, '../../build'),
       filename: 'assets.json'

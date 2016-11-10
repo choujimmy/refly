@@ -1,7 +1,6 @@
 /* @flow */
 import React, { PropTypes } from 'react'
 import serialize from 'serialize-javascript'
-import { toJSON } from '../common/core/transit'
 
 export default class Html extends React.Component {
 
@@ -34,7 +33,7 @@ export default class Html extends React.Component {
           {state && (
             <script
               dangerouslySetInnerHTML={{ __html:
-              `window.__INITIAL_STATE__=${serialize(toJSON(state), { isJSON: true })}` }}
+              `window.__INITIAL_STATE__=${serialize(state, { isJSON: true })}` }}
             />
           )}
           {script && <script src={script} />}
