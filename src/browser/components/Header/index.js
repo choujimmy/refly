@@ -11,7 +11,13 @@ class Header extends Component {
     return (
       <div className={style.container}>
         <div className={style.wrapper}>
-        header
+          <a href='/' title='论坛首页' className={style.logo}>LOGO</a>
+          <div className={style.toolbar_container}>
+            <div className={style.toolbar_user}>
+              <a className={style.toolbar_user_action}>注册</a>
+              <a className={[style.toolbar_user_action, style.toolbar_user_action_last]}>登录</a>
+            </div>
+          </div>
         </div>
       </div>
     )

@@ -1,3 +1,10 @@
-$base-font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', Verdana, Aril, sans-serif;
+@import "../../styles/style";
 
-@import "../../../../node_modules/normalize-scss/sass/normalize/import-now";
+$base-font-family: $main-font-family;
+
+@include normalize();
+
+body {
+  background: $main-color-bg;
+  color: $main-color;
+}

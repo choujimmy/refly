@@ -21,18 +21,6 @@ if (!global.Intl) {
     modules[2].default
     run()
   })
-  /*
-  require.ensure([
-    'intl',
-    'intl/locale-data/jsonp/en.js',
-    'intl/locale-data/jsonp/zh.js'
-  ], require => {
-    require('intl')
-    require('intl/locale-data/jsonp/en.js')
-    require('intl/locale-data/jsonp/zh.js')
-    run()
-  }, 'polyfills')
-  */
 } else {
   run()
 }
