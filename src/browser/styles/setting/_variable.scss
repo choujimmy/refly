@@ -84,6 +84,30 @@ $link-decoration:       none !default;
 $link-hover-color:      darken($link-color, 15%) !default;
 $link-hover-decoration: underline !default;
 
+// 6. Grid Breakpoints
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+@include _assert-starts-at-zero($grid-breakpoints);
+
+// 7. Grid Container
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+) !default;
+
+@include _assert-ascending($container-max-widths, "$container-max-widths");
+
 // 8. Grid columns
 //
 // Set the number of columns and specify the width of the gutters.
@@ -186,3 +210,25 @@ $component-active-bg:    $brand-primary !default;
 
 $caret-width:            0.3em !default;
 $caret-width-lg:         $caret-width !default;
+
+// 24. Badge
+
+$badge-default-bg:            $gray-light !default;
+$badge-primary-bg:            $brand-primary !default;
+$badge-success-bg:            $brand-success !default;
+$badge-info-bg:               $brand-info !default;
+$badge-warning-bg:            $brand-warning !default;
+$badge-danger-bg:             $brand-danger !default;
+
+$badge-color:                 #fff !default;
+$badge-link-hover-color:      #fff !default;
+$badge-font-size:             75% !default;
+$badge-font-weight:           $font-weight-bold !default;
+$badge-padding-x:             0.4em !default;
+$badge-padding-y:             0.25em !default;
+
+$badge-pill-padding-x:        0.6em !default;
+// Use a higher than normal value to ensure completely rounded edges when
+// customizing padding or font-size on labels.
+$badge-pill-border-radius:    10rem !default;
+

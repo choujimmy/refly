@@ -3,8 +3,13 @@ import React, { Component, PropTypes } from 'react'
 import classNames from 'classname'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 import style from './style.scss'
+import Row from './Row'
+import Col from './Col'
 
-class Container extends Component {
+class Grid extends Component {
+  static Row = Row
+  static Col = Col
+
   static propTypes = {
     fluid: PropTypes.bool,
     className: PropTypes.string
@@ -31,4 +36,4 @@ class Container extends Component {
   }
 }
 
-export default withStyles(style)(Container)
+export default withStyles(style)(Grid)
