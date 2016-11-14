@@ -1389,6 +1389,10 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
+classname:
+  version "0.0.0"
+  resolved "http://registry.npm.taobao.org/classname/download/classname-0.0.0.tgz#43d171b484e354c7a293a5b78004df6852db20d6"
+
 cli-cursor@^1.0.1:
   version "1.0.2"
   resolved "http://registry.npm.taobao.org/cli-cursor/download/cli-cursor-1.0.2.tgz#64da3f7d56a54412e59794bd62dc35295e8f2987"

@@ -1,4 +1,5 @@
 /* @flow */
+// forked from https://github.com/kriasoft/webpack-middleware/blob/master/middleware.js
 import MemoryFileSystem from 'memory-fs'
 import mime from 'mime'
 

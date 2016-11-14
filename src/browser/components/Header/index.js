@@ -1,7 +1,9 @@
 /* @flow */
 import React, { Component } from 'react'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
+
 import style from './style.scss'
+import Container from '../Container'
 
 class Header extends Component {
   static propTypes = {
@@ -9,16 +11,8 @@ class Header extends Component {
 
   render () {
     return (
-      <div className={style.container}>
-        <div className={style.wrapper}>
-          <a href='/' title='论坛首页' className={style.logo}>LOGO</a>
-          <div className={style.toolbar_container}>
-            <div className={style.toolbar_user}>
-              <a className={style.toolbar_user_action}>注册</a>
-              <a className={[style.toolbar_user_action, style.toolbar_user_action_last]}>登录</a>
-            </div>
-          </div>
-        </div>
+      <div>
+        <Container>1</Container>
       </div>
     )
   }
