@@ -2,8 +2,6 @@
 
 $base-font-family: $main-font-family;
 
-@include normalize();
-
 body {
   background: $main-color-bg;
   color: $main-color;

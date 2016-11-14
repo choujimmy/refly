@@ -1162,13 +1162,13 @@ browser-sync-ui@0.6.1:
     stream-throttle "^0.1.3"
     weinre "^2.0.0-pre-I0Z7U9OV"
 
-browser-sync@^2.17.5:
-  version "2.17.5"
-  resolved "http://registry.npm.taobao.org/browser-sync/download/browser-sync-2.17.5.tgz#8e0a9ddfc2e162e7aada085f76181c57b6dbdf7a"
+browser-sync@^2.17.6:
+  version "2.17.6"
+  resolved "http://registry.npm.taobao.org/browser-sync/download/browser-sync-2.17.6.tgz#9ea2c205031d12bb27905b5a602999528d1ecfdb"
   dependencies:
     browser-sync-client "^2.3.3"
     browser-sync-ui "0.6.1"
-    bs-recipes "1.2.3"
+    bs-recipes "1.3.2"
     chokidar "1.6.0"
     connect "3.5.0"
     dev-ip "^1.0.1"
@@ -1249,9 +1249,9 @@ browserslist@^1.1.1, browserslist@^1.1.3, browserslist@~1.4.0:
   dependencies:
     caniuse-db "^1.0.30000539"
 
-bs-recipes@1.2.3:
-  version "1.2.3"
-  resolved "http://registry.npm.taobao.org/bs-recipes/download/bs-recipes-1.2.3.tgz#0e4d17bb1cff92ef6c36608b8487d9a07571ac54"
+bs-recipes@1.3.2:
+  version "1.3.2"
+  resolved "http://registry.npm.taobao.org/bs-recipes/download/bs-recipes-1.3.2.tgz#aebff3bfc9dca4cab3c2938d91e43473cf41b6c1"
 
 buffer-equal-constant-time@1.0.1:
   version "1.0.1"
@@ -3673,7 +3673,7 @@ media-typer@0.3.0:
   version "0.3.0"
   resolved "http://registry.npm.taobao.org/media-typer/download/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
 
-memory-fs@^0.3.0, memory-fs@~0.3.0:
+memory-fs, memory-fs@^0.3.0, memory-fs@~0.3.0:
   version "0.3.0"
   resolved "http://registry.npm.taobao.org/memory-fs/download/memory-fs-0.3.0.tgz#7bcc6b629e3a43e871d7e29aca6ae8a7f15cbb20"
   dependencies:
@@ -3720,6 +3720,10 @@ miller-rabin@^4.0.0:
     bn.js "^4.0.0"
     brorand "^1.0.1"
 
+mime, "mime@>= 0.0.1", mime@1.3.4:
+  version "1.3.4"
+  resolved "http://registry.npm.taobao.org/mime/download/mime-1.3.4.tgz#115f9e3b6b3daf2959983cb38f149a2d40eb5d53"
+
 "mime-db@>= 1.24.0 < 2", mime-db@~1.24.0:
   version "1.24.0"
   resolved "http://registry.npm.taobao.org/mime-db/download/mime-db-1.24.0.tgz#e2d13f939f0016c6e4e9ad25a8652f126c467f0c"
@@ -3729,10 +3733,6 @@ mime-types@^2.0.7, mime-types@^2.1.11, mime-types@^2.1.12, mime-types@~2.1.11, m
   resolved "http://registry.npm.taobao.org/mime-types/download/mime-types-2.1.12.tgz#152ba256777020dd4663f54c2e7bc26381e71729"
   dependencies:
     mime-db "~1.24.0"
-
-mime@^1.3.4, "mime@>= 0.0.1", mime@1.3.4:
-  version "1.3.4"
-  resolved "http://registry.npm.taobao.org/mime/download/mime-1.3.4.tgz#115f9e3b6b3daf2959983cb38f149a2d40eb5d53"
 
 mime@1.2.4:
   version "1.2.4"
@@ -3885,9 +3885,9 @@ node-pre-gyp@^0.6.29:
     tar "~2.2.1"
     tar-pack "~3.3.0"
 
-node-sass@^3.11.2:
-  version "3.11.2"
-  resolved "http://registry.npm.taobao.org/node-sass/download/node-sass-3.11.2.tgz#ba3bef8cd46bd1698c2bdb2b6d2af1f9e7d7878f"
+node-sass@^3.12.1:
+  version "3.12.1"
+  resolved "http://registry.npm.taobao.org/node-sass/download/node-sass-3.12.1.tgz#c48315edec4175266f938b0df8af9c372465b866"
   dependencies:
     async-foreach "^0.1.3"
     chalk "^1.1.1"
@@ -3932,10 +3932,6 @@ normalize-path@^2.0.1:
 normalize-range@^0.1.2:
   version "0.1.2"
   resolved "http://registry.npm.taobao.org/normalize-range/download/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
-
-normalize-scss@^6.0.0:
-  version "6.0.0"
-  resolved "http://registry.npm.taobao.org/normalize-scss/download/normalize-scss-6.0.0.tgz#5e94fc91e3bb279933ae8aaa511ad0912a0cb44d"
 
 normalize-selector@^0.2.0:
   version "0.2.0"
@@ -5574,14 +5570,6 @@ tough-cookie@~2.3.0:
   dependencies:
     punycode "^1.4.1"
 
-transit-immutable-js:
-  version "0.6.0"
-  resolved "http://registry.npm.taobao.org/transit-immutable-js/download/transit-immutable-js-0.6.0.tgz#db738a54a152f75c67b51f4cabc0ebe8cdb45f9d"
-
-transit-js:
-  version "0.8.846"
-  resolved "http://registry.npm.taobao.org/transit-js/download/transit-js-0.8.846.tgz#76e06e8f0e6be27675e3442112f5c9bb75343464"
-
 trim-newlines@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/trim-newlines/download/trim-newlines-1.0.0.tgz#5887966bb582a4503a41eb524f7d35011815a613"
@@ -5774,13 +5762,6 @@ webpack-hot-middleware@^2.13.1:
     html-entities "^1.2.0"
     querystring "^0.2.0"
     strip-ansi "^3.0.0"
-
-webpack-middleware@^1.5.1:
-  version "1.5.1"
-  resolved "http://registry.npm.taobao.org/webpack-middleware/download/webpack-middleware-1.5.1.tgz#46511efe3bef92da68913b8977c2caafab5226f3"
-  dependencies:
-    memory-fs "~0.3.0"
-    mime "^1.3.4"
 
 webpack-sources@^0.1.0:
   version "0.1.2"

@@ -1,7 +1,6 @@
 /* @flow */
 import browserSync from 'browser-sync'
 import webpack from 'webpack'
-import webpackMiddleware from 'webpack-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import compression from 'compression'
 
@@ -9,6 +8,7 @@ import run from './run'
 import server from './server'
 import clientConfig from './webpack/config.client'
 import serverConfig from './webpack/config.server'
+import webpackMiddleware from './lib/middleware'
 import clean from './clean'
 import message from './message'
 import copy from './copy'
