@@ -34,6 +34,7 @@ const render = () => {
 
       const context = {
         insertCss: (...styles) => {
+          console.log(styles)
           styles.forEach(style => css.add(style._getCss()))
         },
         store

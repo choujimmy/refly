@@ -9,7 +9,7 @@
   margin: 0 auto;
   max-width: $main-min-width;
 
-  @include clearfix();
+  // @include clearfix();
 }
 
 .logo {
@@ -24,7 +24,7 @@
 }
 
 .toolbar_user {
-  @include clearfix;
+  // @include clearfix;
 }
 
 .toolbar_user_action {

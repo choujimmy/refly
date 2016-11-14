@@ -10,6 +10,8 @@ const config = {
   context: path.resolve(__dirname, '../../src'),
   entry: [
     './browser/index.js',
+    'bootstrap-loader',
+    // `bootstrap-loader/lib/bootstrap.loader?configFilePath=${__dirname}/../bootstrap/rc.json!bootstrap-loader/no-op.js`,
     ...isDebug ? [
       'react-hot-loader/patch',
       'webpack-hot-middleware/client'

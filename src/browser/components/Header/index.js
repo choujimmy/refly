@@ -9,7 +9,7 @@ class Header extends Component {
 
   render () {
     return (
-      <div className={style.container}>
+      <div className={`container ${style.container1}`}>
         <div className={style.wrapper}>
           <a href='/' title='论坛首页' className={style.logo}>LOGO</a>
           <div className={style.toolbar_container}>
@@ -18,6 +18,9 @@ class Header extends Component {
               <a className={[style.toolbar_user_action, style.toolbar_user_action_last]}>登录</a>
             </div>
           </div>
+        </div>
+        <div className='container'>
+          haha
         </div>
       </div>
     )

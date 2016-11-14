@@ -7,7 +7,11 @@ const isVerbose = process.argv.includes('--verbose')
 
 const config = {
   context: path.resolve(__dirname, '../../src'),
-  entry: './server/index.js',
+  entry: [
+    './server/index.js',
+    'bootstrap-loader'
+    // `bootstrap-loader/lib/bootstrap.loader?configFilePath=${__dirname}/../bootstrap/rc.json!bootstrap-loader/no-op.js`
+  ],
   devtool: 'source-map',
   output: {
     filename: '../../server.js',
@@ -41,6 +45,7 @@ const config = {
     (context: any, request: string, callback: Function) => {
       const isExternal =
         request.match(/^[@a-z][a-z/.\-0-9]*$/i) &&
+        !request.match(/^bootstrap-loader/) &&
         !request.match(/\.(css|less|scss|sss)$/i)
       callback(null, Boolean(isExternal))
     }

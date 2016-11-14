@@ -1,0 +1,13 @@
+{
+  "bootstrapVersion": 4,
+  "useFlexbox": true,
+  "styleLoaders": ["isomorphic-style", "css", "postcss", "sass"],
+  "styles": {
+    "mixins": true,
+    "normalize": true,
+    "print": false,
+    "grid": true
+  },
+  "scripts": false,
+  "extractStyles": false
+}
