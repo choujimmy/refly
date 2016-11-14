@@ -4,6 +4,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles'
 
 import style from './style.scss'
 import Container from '../Container'
+import Badge from '../Badge'
 
 class Header extends Component {
   static propTypes = {
@@ -12,7 +13,7 @@ class Header extends Component {
   render () {
     return (
       <div>
-        <Container>1</Container>
+        <Container><Badge>测试</Badge></Container>
       </div>
     )
   }
