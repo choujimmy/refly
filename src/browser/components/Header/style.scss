@@ -1,35 +1,11 @@
 @import "../../styles/style";
 
-.container {
-  min-width: $main-min-width;
+.header {
+  border-bottom: 1px solid #f1f1f1;
+  background-color: #fff;
 }
 
-.wrapper {
-  padding: 1em 0 0;
-  margin: 0 auto;
-  max-width: $main-min-width;
-
-  // @include clearfix();
+.row {
+  align-items: center;
+  height: 4em;
 }
-
-.logo {
-  float: left;
-  color: $main-color;
-  font-size: 2em;
-  text-decoration: none;
-}
-
-.toolbar_container {
-  float: right;
-}
-
-.toolbar_user {
-  // @include clearfix;
-}
-
-.toolbar_user_action {
-  float: left;
-  margin-left: 1em;
-}
-
-
