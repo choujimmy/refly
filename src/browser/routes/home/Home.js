@@ -13,12 +13,7 @@ class Home extends React.Component {
     const { title } = this.props
     return (
       <Layout full={false}>
-        <div className={style.root}>
-          <div className={style.container}>
-            <h1>{title}</h1>
-            <p>Home</p>
-          </div>
-        </div>
+        <div />
       </Layout>
     )
   }

@@ -1,1 +1,11 @@
 @import "../../styles/style";
+
+.header {
+  border-bottom: 1px solid #f1f1f1;
+  background-color: #fff;
+}
+
+.row {
+  align-items: center;
+  height: 4em;
+}
