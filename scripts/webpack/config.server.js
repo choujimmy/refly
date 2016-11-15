@@ -67,25 +67,24 @@ const config = {
           cacheDirectory: isDebug,
           babelrc: false,
           presets: [
-            'react',
             'latest',
-            'stage-0'
+            'stage-0',
+            'react',
+            ...isDebug ? [] : [
+              'react-optimize'
+            ]
           ],
           plugins: [
             'transform-runtime',
             'transform-flow-strip-types',
-            ...isDebug ? [
-              'transform-react-jsx-source',
-              'transform-react-jsx-self'
-            ] : [
-              'transform-react-remove-prop-types',
-              'transform-react-constant-elements',
-              'transform-react-inline-elements'
-            ],
             ['react-intl',
               {
                 enforceDescriptions: true
               }
+            ],
+            ...!isDebug ? [] : [
+              'transform-react-jsx-source',
+              'transform-react-jsx-self'
             ]
           ]
         }
