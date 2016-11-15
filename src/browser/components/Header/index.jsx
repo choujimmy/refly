@@ -1,7 +1,6 @@
 /* @flow */
 import React, { Component } from 'react'
-import withStyles from 'isomorphic-style-loader/lib/withStyles'
-
+import CSSModules from 'react-css-modules'
 import style from './style.scss'
 
 class Header extends Component {
@@ -10,11 +9,11 @@ class Header extends Component {
 
   render () {
     return (
-      <header className={style['header']}>
+      <header styleName='header'>
       header
       </header>
     )
   }
 }
 
-export default withStyles(style)(Header)
+export default CSSModules(Header, style)

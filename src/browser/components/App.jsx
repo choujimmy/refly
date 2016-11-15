@@ -3,7 +3,6 @@ import React, { Children, PropTypes } from 'react'
 import { IntlProvider } from 'react-intl'
 
 const ContextType = {
-  insertCss: PropTypes.func.isRequired,
   store: PropTypes.shape({
     subscribe: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,

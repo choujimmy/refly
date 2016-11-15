@@ -1,8 +1,8 @@
 /* @flow */
 import React, { PropTypes } from 'react'
-import withStyles from 'isomorphic-style-loader/lib/withStyles'
+import CSSModules from 'react-css-modules'
 import Layout from '../../components/Layout'
-import style from './Home.scss'
+import style from './style.scss'
 
 class Home extends React.Component {
   static propTypes = {
@@ -10,7 +10,6 @@ class Home extends React.Component {
   }
 
   render () {
-    const { title } = this.props
     return (
       <Layout full={false}>
         <div />
@@ -19,4 +18,4 @@ class Home extends React.Component {
   }
 }
 
-export default withStyles(style)(Home)
+export default CSSModules(Home, style)

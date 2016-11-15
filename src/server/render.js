@@ -30,12 +30,7 @@ const render = () => {
       const locale = ctx.state.language
       await store.dispatch(setLocale(locale))
 
-      const css = new Set()
-
       const context = {
-        insertCss: (...styles) => {
-          styles.forEach(style => css.add(style._getCss()))
-        },
         store
       }
 
@@ -53,8 +48,8 @@ const render = () => {
 
       const data = { ...route }
       data.children = ReactDOM.renderToString(<App context={context}>{route.component}</App>)
-      data.style = [...(css:any)].join('')
       data.script = assets.main.js
+      data.style = assets.main.css
       data.state = context.store.getState()
       data.lang = locale
       data.chunk = assets[route.chunk] && assets[route.chunk].js

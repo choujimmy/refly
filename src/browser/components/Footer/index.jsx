@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react'
-import withStyles from 'isomorphic-style-loader/lib/withStyles'
+import CSSModules from 'react-css-modules'
 import style from './style.scss'
 
 class Footer extends React.Component {
@@ -9,9 +9,9 @@ class Footer extends React.Component {
 
   render () {
     return (
-      <div></div>
+      <div>footer</div>
     )
   }
 }
 
-export default withStyles(style)(Footer)
+export default CSSModules(Footer, style)

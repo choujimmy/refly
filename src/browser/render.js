@@ -17,10 +17,6 @@ import { updateMeta } from './utils/meta'
 const history = createBrowserHistory()
 const store = configureStore(window.__INITIAL_STATE__, { history })
 const context = {
-  insertCss: (...styles) => {
-    const removeCss = styles.map(x => x._insertCss())
-    return () => { removeCss.forEach(f => f()) }
-  },
   store
 }
 
@@ -29,38 +25,32 @@ if (window.history && 'scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual'
 }
 
-let onRenderComplete = () => {
-  const elem = document.getElementById('css')
-  if (elem && elem.parentNode) {
-    elem.parentNode.removeChild(elem)
-  }
-  onRenderComplete = (route, location) => {
-    document.title = route.title
+const onRenderComplete = (route, location) => {
+  document.title = route.title
 
-    // 更新需要的页面头部标签
-    updateMeta('description', route.description)
+  // 更新需要的页面头部标签
+  updateMeta('description', route.description)
 
-    let scrollX = 0
-    let scrollY = 0
-    const pos = scrollPositionsHistory[location.key]
-    if (pos) {
-      scrollX = pos.scrollX
-      scrollY = pos.scrollY
-    } else {
-      const targetHash = location.hash.substr(1)
-      if (targetHash) {
-        const target = document.getElementById(targetHash)
-        if (target) {
-          scrollY = window.pageYOffset + target.getBoundingClientRect().top
-        }
+  let scrollX = 0
+  let scrollY = 0
+  const pos = scrollPositionsHistory[location.key]
+  if (pos) {
+    scrollX = pos.scrollX
+    scrollY = pos.scrollY
+  } else {
+    const targetHash = location.hash.substr(1)
+    if (targetHash) {
+      const target = document.getElementById(targetHash)
+      if (target) {
+        scrollY = window.pageYOffset + target.getBoundingClientRect().top
       }
     }
-
-    // 恢复页面的滚动位置
-    window.scrollTo(scrollX, scrollY)
-
-    // 这里可以加入访问统计代码
   }
+
+  // 恢复页面的滚动位置
+  window.scrollTo(scrollX, scrollY)
+
+  // 这里可以加入访问统计代码
 }
 
 const container = document.getElementById('app')

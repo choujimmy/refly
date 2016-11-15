@@ -1,6 +1,6 @@
 /* @flow */
-import React, { PropTypes, Children } from 'react'
-import withStyles from 'isomorphic-style-loader/lib/withStyles'
+import React, { PropTypes } from 'react'
+import CSSModules from 'react-css-modules'
 import style from './style.scss'
 import Header from '../Header'
 import Footer from '../Footer'
@@ -21,4 +21,4 @@ class Layout extends React.Component {
   }
 }
 
-export default withStyles(style)(Layout)
+export default CSSModules(Layout, style)

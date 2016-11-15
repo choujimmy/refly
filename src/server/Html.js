@@ -26,7 +26,12 @@ export default class Html extends React.Component {
           <meta name='description' content={description} />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
           <link rel='apple-touch-icon' href='apple-touch-icon.png' />
-          {style && <style id='css' dangerouslySetInnerHTML={{ __html: style }} />}
+          {style &&
+            <link
+              href={style}
+              media='screen, projection'
+              rel='stylesheet' type='text/css' charSet='UTF-8' />
+          }
         </head>
         <body>
           <div id='app' dangerouslySetInnerHTML={{ __html: children }} />
