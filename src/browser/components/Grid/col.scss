@@ -1,5 +1,0 @@
-@import "../../styles/style";
-
-@if $enable-grid-classes {
-  @include make-grid-columns();
-}
