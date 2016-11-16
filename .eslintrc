@@ -13,7 +13,9 @@
       "node": true,
       "browser": false
     },
-    "rules": {},
+    "rules": {
+      "no-class-assign": 0
+    },
     "globals": {
       "__DEV__": true
     }

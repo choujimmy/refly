@@ -106,15 +106,18 @@
     "koa-request-language": "^1.0.2",
     "koa-session": "^3.4.0",
     "koa-static": "next",
+    "normalize-scss": "^6.0.0",
     "query-string": "^4.2.3",
     "react": "^15.3.2",
     "react-css-modules": "^4.0.3",
     "react-dom": "^15.3.2",
+    "react-helmet": "^3.2.2",
     "react-intl": "^2.1.5",
+    "react-redux": "^4.4.6",
+    "react-router": "next",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.1.0",
-    "serialize-javascript": "^1.3.0",
-    "universal-router": "^2.0.0"
+    "serialize-javascript": "^1.3.0"
   }
 }
