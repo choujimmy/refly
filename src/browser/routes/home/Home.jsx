@@ -1,7 +1,6 @@
 /* @flow */
 import React, { PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
-import Layout from '../../components/Layout'
 import style from './style.scss'
 
 class Home extends React.Component {
@@ -11,9 +10,7 @@ class Home extends React.Component {
 
   render () {
     return (
-      <Layout full={false}>
-        <div />
-      </Layout>
+      <div />
     )
   }
 }
