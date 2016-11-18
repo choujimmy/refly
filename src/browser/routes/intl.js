@@ -14,7 +14,6 @@ const intl = (WrappedComponent: Function) => {
       const { intl, ...props } = this.props
       const { initialNow, locale, messages } = intl
       const localeMessages = (messages && messages[locale]) || {}
-
       return (
         <IntlProvider
           initialNow={initialNow}

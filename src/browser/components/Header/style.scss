@@ -5,7 +5,46 @@
   background-color: #fff;
 }
 
-.row {
-  align-items: center;
+.wrap {
+  margin: 0 auto;
+  width: 1000px;
   height: 4em;
+  display: flex;
+  align-items: center;
+
+  .logo {
+    font-size: 1em;
+    width: 200px;
+    color: $color-primary;
+  }
+
+  .slogan {
+    flex: 1;
+    color: $color-primary;
+  }
+
+  .search-container {
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 0 .5em;
+    width: 15em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #909090;
+
+    .search-icon {
+      font-size: 1em;
+    }
+
+    .search-input {
+      border: none;
+      padding: .5em;
+      font-size: .8em;
+      color: rgba(0,0,0,.3);
+      background: transparent;
+      line-height: 1;
+      flex: 1;
+    }
+  }
 }

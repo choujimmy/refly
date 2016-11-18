@@ -128,18 +128,10 @@ const config = {
         loader: 'raw-loader'
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-        loader: 'url-loader',
-        query: {
-          name: isDebug ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
-          limit: 10000
-        }
-      },
-      {
-        test: /\.(eot|ttf|wav|mp3)$/,
+        test: /\.(eot|ttf|wav|mp3|png|jpg|jpeg|gif|svg|woff|woff2)$/,
         loader: 'file-loader',
         query: {
-          name: isDebug ? '[path][name].[ext]?[hash]' : '[hash].[ext]'
+          name: isDebug ? '[name].[ext]?[hash]' : '[hash].[ext]'
         }
       }
     ]

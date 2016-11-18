@@ -78,14 +78,13 @@ const render = () => {
 
       if (result.missed) {
         ctx.status = 404
-        return
       }
 
-      const bodyMarkupWithHelmet = renderBody(store, context, ctx.url)
+      const bodyMarkupWithHelmet = renderBody(store, context, ctx.originalUrl)
       const htmlMarkup = renderHtml(store.getState(), locale, bodyMarkupWithHelmet)
-
       ctx.body = htmlMarkup
     } catch (err) {
+      console.log('服务端渲染错误:', err)
       next(err)
     }
   }

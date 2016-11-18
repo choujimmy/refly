@@ -1,3 +1,15 @@
 @import "../styles/style";
 
+$base-font-family: $font-family;
+
 @include normalize();
+
+body {
+  color: $color-text;
+  background-color: $color-page;
+}
+
+*, ::after, ::before {
+  box-sizing: border-box;
+  outline: none;
+}
