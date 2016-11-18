@@ -8,9 +8,9 @@ class Icon extends Component {
   }
 
   render () {
-    const { name, ...props } = this.props
+    const { name, ...attributes } = this.props
     return (
-      <i styleName={`icon icon-${name}`} {...props} />
+      <i styleName={`icon icon-${name}`} {...attributes} />
     )
   }
 }

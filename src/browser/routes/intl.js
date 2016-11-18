@@ -12,7 +12,7 @@ const intl = (WrappedComponent: Function) => {
     }
 
     render () {
-      const { intl, ...props } = this.props
+      const { intl, ...attributes } = this.props
       const locale = intl.get('locale', 'en-US')
       return (
         <IntlProvider
@@ -21,7 +21,7 @@ const intl = (WrappedComponent: Function) => {
           messages={intl.getIn(['messages', locale], Map({})).toJS()}
           defaultLocale='en-US'
         >
-          <WrappedComponent {...props} />
+          <WrappedComponent {...attributes} />
         </IntlProvider>
       )
     }
