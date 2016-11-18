@@ -1,12 +1,7 @@
 /* @flow */
-import type { Action } from '../../types/action.d'
-import { Record } from './model'
+import { createReducer } from 'redux-immutablejs'
+import { fromJS } from 'immutable'
 
-const initialState = new Record()
+const initialState = fromJS({})
 
-export default function runtime (state: Record = initialState, action: Action) {
-  switch (action.type) {
-    default:
-      return state
-  }
-}
+export default createReducer(initialState, {})

@@ -2,6 +2,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
+import { fromJS } from 'immutable'
 
 import rootReducer from '../reducers'
 import createHelpers from './createHelpers'
@@ -45,7 +46,7 @@ export default function configureStore (initialState: any, helpersConfig: Helper
     enhancer = applyMiddleware(...middleware)
   }
 
-  const store = createStore(rootReducer, initialState, enhancer)
+  const store = createStore(rootReducer, fromJS(initialState), enhancer)
 
   if (__DEV__ && module.hot) {
     (module.hot:any).accept('../reducers', () =>

@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "id": "header.login",
+    "defaultMessage": "Login",
+    "message": "登录",
+    "description": "页眉未登录状态登录链接文字",
+    "files": [
+      "src/browser/components/Header/NotLogin.jsx"
+    ]
+  },
+  {
+    "id": "header.register",
+    "defaultMessage": "Register",
+    "message": "注册",
+    "description": "页眉未登录状态注册链接文字",
+    "files": [
+      "src/browser/components/Header/NotLogin.jsx"
+    ]
+  },
+  {
+    "id": "header.search_placeholder",
+    "description": "页眉全局搜索提示文本",
+    "defaultMessage": "Keyword",
+    "message": "请输入关键字搜索",
+    "files": [
+      "src/browser/components/Header/index.jsx"
+    ]
+  }
+]

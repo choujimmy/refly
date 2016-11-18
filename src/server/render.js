@@ -6,7 +6,6 @@ import { readFileSync } from 'fs'
 import { createServerRenderContext, ServerRouter } from 'react-router'
 import { Provider } from 'react-redux'
 import Helmet from 'react-helmet'
-import serialize from 'serialize-javascript'
 
 import App from '../browser/routes/App'
 import Html from './Html'
@@ -34,7 +33,7 @@ const renderBody = (store, context, location) => {
 const renderScripts = (state, appJsFilename) =>
 `
   <script>
-    window.__INITIAL_STATE__ = ${serialize(state)};
+    window.__INITIAL_STATE__ = ${JSON.stringify(state)};
   </script>
   <script src="${appJsFilename}"></script>
 `

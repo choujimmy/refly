@@ -25,4 +25,8 @@ class App extends Component {
   }
 }
 
-export default intl(CSSModules(App, style))
+App = CSSModules(App, style)
+
+App = intl(App)
+
+export default App

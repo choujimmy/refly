@@ -1,22 +1,31 @@
 /* @flow */
-import type { Action } from '../../types/action.d'
-import { Record } from './model'
+import { createReducer } from 'redux-immutablejs'
+import { fromJS } from 'immutable'
 
 export const SET_LOCALE_START = 'intl/SET_LOCALE_START'
 export const SET_LOCALE_SUCCESS = 'intl/SET_LOCALE_SUCCESS'
 export const SET_LOCALE_ERROR = 'intl/SET_LOCALE_ERROR'
 
-const initialState = new Record()
+const initialState = fromJS({
+  initialNow: Date.now()
+})
 
-export default function runtime (state: Record = initialState, action: Action) {
-  switch (action.type) {
-    case SET_LOCALE_START:
-      return state.setLocaleStart(action.payload)
-    case SET_LOCALE_SUCCESS:
-      return state.setLocaleSuccess(action.payload.locale, action.payload.messages)
-    case SET_LOCALE_ERROR:
-      return state.setLocaleError()
-    default:
-      return state
+export default createReducer(initialState, {
+  [SET_LOCALE_START]: (state, action) => {
+    const locale = action.payload
+    return state
+      .set('locale', state.get(locale) ? locale : state.get('locale'))
+      .set('newLocale', locale)
+  },
+
+  [SET_LOCALE_SUCCESS]: (state, action) => {
+    const { locale, messages } = action.payload
+    return state.set('locale', locale)
+      .set('newLocale', null)
+      .setIn(['messages', locale], fromJS(messages))
+  },
+
+  [SET_LOCALE_ERROR]: (state, action) => {
+    return state.set('newLocale', null)
   }
-}
+})
