@@ -38,8 +38,9 @@ const start = async () => {
       const bs = browserSync.create()
 
       const bsOption = {
-        ...(clientConfig.cache ? {} : { notify: false, ui: false }),
+        ...(clientConfig.cache ? {} : { ui: false }),
         open: false,
+        notify: false,
         proxy: {
           target: serverInstance.host,
           middleware: [wpMiddleware, hotMiddleware]

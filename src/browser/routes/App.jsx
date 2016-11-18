@@ -7,6 +7,8 @@ import intl from './intl'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Home from './home'
+import Register from './register'
+import Login from './login'
 
 class App extends Component {
 
@@ -14,11 +16,13 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Match pattern='/' component={Home} />
+        <Match pattern='/' exactly component={Home} />
+        <Match pattern='/register' component={Register} />
+        <Match pattern='/login' component={Login} />
         <Footer />
       </div>
     )
   }
 }
 
-export default intl(App)
+export default intl(CSSModules(App, style))
