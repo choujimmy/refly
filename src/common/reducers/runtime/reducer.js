@@ -1,11 +1,10 @@
 /* @flow */
-import { createReducer } from 'redux-immutablejs'
-import { fromJS } from 'immutable'
+import { createReducer } from '../../core/createReducer'
 
 export const SET_INITIAL_NOW = 'runtime/SET_INITIAL_NOW'
 export const SET_AVAILABLE_LOCALES = 'runtime/SET_AVAILABLE_LOCALES'
 
-const initialState = fromJS({})
+const initialState = {}
 
 export default createReducer(initialState, {
   [SET_INITIAL_NOW]: (state, action) => {

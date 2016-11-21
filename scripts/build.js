@@ -1,7 +1,6 @@
 /* @flow */
 import run from './run'
 import clean from './clean'
-import message from './message'
 import copy from './copy'
 import bundle from './bundle'
 import render from './render'
@@ -11,7 +10,6 @@ import render from './render'
  */
 const build = async () => {
   await run(clean)
-  await run(message)
   await run(copy)
   await run(bundle)
 

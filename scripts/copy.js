@@ -19,14 +19,12 @@ const copy = async () => {
       }
     }, null, 2)),
     copyFile('LICENSE', 'build/LICENSE'),
-    copyDir('src/common/public', 'build/public'),
-    copyDir('src/common/messages', 'build/messages')
+    copyDir('src/common/public', 'build/public')
   ])
 
   if (process.argv.includes('--watch')) {
     const watcher = await new Promise((resolve, reject) => {
       gaze([
-        'src/common/messages/**/*',
         'src/common/public/**/*'
       ], (err, val) => (err ? reject(err) : resolve(val)))
     })

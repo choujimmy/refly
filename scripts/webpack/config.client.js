@@ -68,11 +68,6 @@ const config = {
           plugins: [
             'transform-runtime',
             'transform-flow-strip-types',
-            ['react-intl',
-              {
-                enforceDescriptions: true
-              }
-            ],
             ...!isDebug ? [] : [
               'transform-react-jsx-source',
               'transform-react-jsx-self'

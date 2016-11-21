@@ -1,7 +1,6 @@
 /* @flow */
-import { createReducer } from 'redux-immutablejs'
-import { fromJS } from 'immutable'
+import { createReducer } from '../../core/createReducer'
 
-const initialState = fromJS({})
+const initialState = {}
 
 export default createReducer(initialState, {})

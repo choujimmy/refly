@@ -2,28 +2,18 @@
 import React, { Component, PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
 import { connect } from 'react-redux'
-import { defineMessages, injectIntl, intlShape } from 'react-intl'
 import style from './style.scss'
 import Icon from '../Icon'
 import NotLogin from './NotLogin'
 
-const messages = defineMessages({
-  placeholder: {
-    id: 'header.search_placeholder',
-    defaultMessage: 'Keyword',
-    description: '页眉全局搜索提示文本'
-  }
-})
-
 class Header extends Component {
   static propTypes = {
-    intl: intlShape.isRequired,
     styles: PropTypes.object,
     user: PropTypes.object
   }
 
   render () {
-    const { user, intl } = this.props
+    const { user } = this.props
     return (
       <header styleName='header'>
         <div styleName='wrap'>
@@ -31,9 +21,9 @@ class Header extends Component {
           <span styleName='slogan'>Slogan</span>
           <div styleName='search-container'>
             <Icon name='search' className={this.props.styles['search-icon']} />
-            <input type='text' placeholder={intl.formatMessage(messages.placeholder)} styleName='search-input' />
+            <input type='text' placeholder='输入关键字搜索' styleName='search-input' />
           </div>
-          {(!user || !user.has('me')) &&
+          {(!user || !user.me) &&
             <NotLogin />
           }
         </div>
@@ -44,10 +34,8 @@ class Header extends Component {
 
 Header = CSSModules(Header, style)
 
-Header = injectIntl(Header)
-
 Header = connect((state) => ({
-  user: state.get('user')
+  user: state.user
 }))(Header)
 
 export default Header

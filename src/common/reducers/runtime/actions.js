@@ -1,5 +1,5 @@
 /* @flow */
-import { SET_INITIAL_NOW, SET_AVAILABLE_LOCALES } from './reducer'
+import { SET_INITIAL_NOW } from './reducer'
 import type { Action } from '../../types/action.d'
 
 const setInitialNow = (time: number): Action => {
@@ -9,11 +9,4 @@ const setInitialNow = (time: number): Action => {
   }
 }
 
-const setAvailableLocales = (locales: string[]): Action => {
-  return {
-    type: SET_AVAILABLE_LOCALES,
-    payload: locales
-  }
-}
-
-export { setInitialNow, setAvailableLocales }
+export { setInitialNow }

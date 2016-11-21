@@ -10,9 +10,7 @@ import Helmet from 'react-helmet'
 import App from '../browser/routes/App'
 import Html from './Html'
 import configureStore from '../common/store/configureStore'
-import { setInitialNow, setAvailableLocales } from '../common/reducers/runtime/actions'
-import { setLocale } from '../common/reducers/intl/actions'
-import { locales } from '../common/config'
+import { setInitialNow } from '../common/reducers/runtime/actions'
 
 const assets = JSON.parse(readFileSync(`${__dirname}/assets.json`, 'utf-8'))
 
@@ -38,13 +36,12 @@ const renderScripts = (state, appJsFilename) =>
   <script src="${appJsFilename}"></script>
 `
 
-const renderHtml = (state, locale, bodyMarkupWithHelmet) => {
+const renderHtml = (state, bodyMarkupWithHelmet) => {
   const { markup: bodyMarkup, helmet } = bodyMarkupWithHelmet
   const scriptsMarkup = renderScripts(state, assets.main.js)
   const markup = renderToStaticMarkup(
     <Html
       appCssFilename={assets.main.css}
-      locale={locale}
       bodyHtml={`<div id="app">${bodyMarkup}</div>${scriptsMarkup}`}
       helmet={helmet}
     />
@@ -62,10 +59,6 @@ const render = () => {
       })
 
       store.dispatch(setInitialNow(Date.now()))
-      store.dispatch(setAvailableLocales(locales))
-
-      const locale = ctx.state.language
-      await store.dispatch(setLocale(locale))
 
       const context = createServerRenderContext()
       const result = context.getResult()
@@ -80,7 +73,7 @@ const render = () => {
       }
 
       const bodyMarkupWithHelmet = renderBody(store, context, ctx.originalUrl)
-      const htmlMarkup = renderHtml(store.getState(), locale, bodyMarkupWithHelmet)
+      const htmlMarkup = renderHtml(store.getState(), bodyMarkupWithHelmet)
       ctx.body = htmlMarkup
     } catch (err) {
       console.log('服务端渲染错误:', err)

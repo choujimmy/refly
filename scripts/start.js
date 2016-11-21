@@ -10,7 +10,6 @@ import clientConfig from './webpack/config.client'
 import serverConfig from './webpack/config.server'
 import webpackMiddleware from './lib/middleware'
 import clean from './clean'
-import message from './message'
 import copy from './copy'
 
 process.argv.push('--watch')
@@ -21,7 +20,6 @@ process.argv.push('--watch')
  */
 const start = async () => {
   await run(clean)
-  await run(message)
   await run(copy)
   await new Promise(resolve => {
     const bundler = webpack([clientConfig, serverConfig])
