@@ -1,12 +1,7 @@
 [ignore]
-.*/build
+.*/.next
 .*/node_modules/react-side-effect/.*
-
-[libs]
-./interfaces/global.d.js
-./interfaces/constant.d.js
+.*/node_modules/glamor/.*
 
 [options]
-module.name_mapper='^.*\.scss' -> 'CSSModule'
-module.name_mapper.extension='png' -> 'ImageModule'
 module.system=haste
