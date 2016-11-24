@@ -1,6 +1,0 @@
-options:
-  merge-default-rules: false
-files:
-  include: 'src/**/*.s+(a|c)ss'
-  ignore:
-    - 'node_modules/**/*.*'

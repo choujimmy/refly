@@ -1,5 +1,6 @@
 /* @flow */
 import path from 'path'
+import colors from 'colors'
 import Koa from 'koa'
 import convert from 'koa-convert'
 import serve from 'koa-static'
@@ -43,7 +44,7 @@ app.use(passport.session())
 // -----------------------------------------------------------------------------s
 app.use(mount('/graphql', convert(graphqlHTTP({
   schema,
-  graphiql: true,
+  graphiql: process.env.NODE_ENV !== 'production',
   pretty: process.env.NODE_ENV !== 'production'
 }))))
 
@@ -56,5 +57,5 @@ app.use(render())
 // 运行服务端
 // -----------------------------------------------------------------------------
 app.listen(port, () => {
-  console.log(`服务启动成功, 侦听地址 http://localhost:${port}/`)
+  console.log(colors.red(`==> [SERVER] -> 服务启动成功, 侦听地址 http://localhost:${port}/`))
 })

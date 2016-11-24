@@ -1,14 +1,11 @@
 /* @flow */
 import React from 'react'
 import ReactDOM from 'react-dom'
-import createBrowserHistory from 'history/createBrowserHistory'
 
 import Root from './Root'
 import configureStore from '../common/store/configureStore'
 
-const history = createBrowserHistory()
-const store = configureStore(window.__INITIAL_STATE__, { history })
-
+const store = configureStore(window.__INITIAL_STATE__)
 const container = document.getElementById('app')
 
 ReactDOM.render(

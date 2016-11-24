@@ -1,21 +1,16 @@
 /* @flow */
 import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 
 import rootReducer from '../reducers'
-import createHelpers from './createHelpers'
-import type { HelpersConfig } from '../types/helper.d'
 
-export default function configureStore (initialState: any, helpersConfig: HelpersConfig) {
-  const helpers = createHelpers(helpersConfig)
-  const middleware = [thunk.withExtraArgument(helpers)]
-
+export default function configureStore (initialState: any) {
   let enhancer
+  const middlewares = []
 
   if (__DEV__) {
     if (process.env.BROWSER) {
-      middleware.push(logger({
+      middlewares.push(logger({
         collapsed: true
       }))
     } else {
@@ -25,11 +20,11 @@ export default function configureStore (initialState: any, helpersConfig: Helper
           const formattedPayload = inspect(action.payload, {
             colors: true
           })
-          console.log(` * ${action.type}: ${formattedPayload}`)
+          console.log(`==> [ACTION] -> ${action.type}: ${formattedPayload}`)
           return next(action)
         }
       }
-      middleware.push(createLogger())
+      middlewares.push(createLogger())
     }
 
     let devToolsExtension = f => f
@@ -38,11 +33,11 @@ export default function configureStore (initialState: any, helpersConfig: Helper
     }
 
     enhancer = compose(
-      applyMiddleware(...middleware),
+      applyMiddleware(...middlewares),
       devToolsExtension,
     )
   } else {
-    enhancer = applyMiddleware(...middleware)
+    enhancer = applyMiddleware(...middlewares)
   }
 
   const store = createStore(rootReducer, initialState, enhancer)

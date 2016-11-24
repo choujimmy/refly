@@ -2,7 +2,6 @@
 import path from 'path'
 import webpack from 'webpack'
 import AssetsPlugin from 'assets-webpack-plugin'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 const isDebug = !process.argv.includes('--release')
 const isVerbose = process.argv.includes('--verbose')
@@ -27,7 +26,7 @@ const config = {
   },
   resolve: {
     modules: [path.resolve(__dirname, '../../src'), 'node_modules'],
-    extensions: ['.webpack.js', '.web.js', '.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx', '.json']
   },
   cache: isDebug,
   stats: {
@@ -76,35 +75,6 @@ const config = {
         }
       },
       {
-        test: /\.css/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
-            `css-loader?${JSON.stringify({
-              sourceMap: isDebug,
-              minimize: !isDebug
-            })}`
-          ]
-        })
-      },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
-            `css-loader?${JSON.stringify({
-              importLoaders: 2,
-              sourceMap: isDebug,
-              modules: true,
-              localIdentName: isDebug ? '[name]-[local]-[hash:base64:5]' : '[hash:base64:5]',
-              minimize: !isDebug
-            })}`,
-            'postcss-loader',
-            'sass-loader'
-          ]
-        })
-      },
-      {
         test: /\.json$/,
         loader: 'json-loader'
       },
@@ -129,10 +99,7 @@ const config = {
         context: __dirname,
         output: {
           path: path.join(__dirname, '../../static')
-        },
-        postcss: (bundler) => [
-          require('autoprefixer')({ browsers: ['last 2 versions'] })
-        ]
+        }
       }
     }),
 
@@ -146,11 +113,6 @@ const config = {
     new AssetsPlugin({
       path: path.resolve(__dirname, '../../build'),
       filename: 'assets.json'
-    }),
-
-    new ExtractTextPlugin({
-      filename: isDebug ? '[name].css?[chunkhash]' : '[name].[chunkhash].css',
-      allChunks: true
     }),
 
     new webpack.optimize.OccurrenceOrderPlugin(true),

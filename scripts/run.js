@@ -1,16 +1,20 @@
 /* @flow */
+import notify from './lib/notify'
+
 const run = (fn: Function, options?: string) => {
   const task = typeof fn.default === 'undefined' ? fn : fn.default
   const start = new Date()
-  console.log(
-    `[${task.name}${options ? ` (${options})` : ''}]任务启动...`
-  )
+  notify({
+    title: task.name,
+    message: `任务启动${options ? ` (${options})` : ''}`
+  })
   return task(options).then(resolution => {
     const end = new Date()
     const time = end.getTime() - start.getTime()
-    console.log(
-      `[${task.name}${options ? ` (${options})` : ''}]任务结束, 耗时 ${time} 毫秒`
-    )
+    notify({
+      title: task.name,
+      message: `任务${options ? ` (${options})` : ''}成功完成，耗时${time}毫秒`
+    })
     return resolution
   })
 }

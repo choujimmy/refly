@@ -1,7 +1,7 @@
 /* @flow */
-import React, { PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
 
-export default class Html extends React.Component {
+export default class Html extends Component {
 
   static propTypes = {
     appCssFilename: PropTypes.string,

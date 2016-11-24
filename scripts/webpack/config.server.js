@@ -1,7 +1,6 @@
 /* @flow */
 import path from 'path'
 import webpack from 'webpack'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 const isDebug = !process.argv.includes('--release')
 const isVerbose = process.argv.includes('--verbose')
@@ -86,35 +85,6 @@ const config = {
         }
       },
       {
-        test: /\.css/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
-            `css-loader?${JSON.stringify({
-              sourceMap: isDebug,
-              minimize: !isDebug
-            })}`
-          ]
-        })
-      },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
-            `css-loader?${JSON.stringify({
-              importLoaders: 2,
-              sourceMap: isDebug,
-              modules: true,
-              localIdentName: isDebug ? '[name]-[local]-[hash:base64:5]' : '[hash:base64:5]',
-              minimize: !isDebug
-            })}`,
-            'postcss-loader',
-            'sass-loader'
-          ]
-        })
-      },
-      {
         test: /\.json$/,
         loader: 'json-loader'
       },
@@ -139,10 +109,7 @@ const config = {
         context: __dirname,
         output: {
           path: path.join(__dirname, '../../static')
-        },
-        postcss: (bundler) => [
-          require('autoprefixer')({ browsers: ['last 2 versions'] })
-        ]
+        }
       }
     }),
 
@@ -150,11 +117,6 @@ const config = {
       'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
       'process.env.BROWSER': false,
       __DEV__: isDebug
-    }),
-
-    new ExtractTextPlugin({
-      filename: isDebug ? '[name].css?[chunkhash]' : '[name].[chunkhash].css',
-      allChunks: true
     }),
 
     new webpack.BannerPlugin({

@@ -54,8 +54,6 @@ const render = () => {
     try {
       const store = configureStore({
         user: ctx.session.user || null
-      }, {
-        cookie: ctx.headers['cookie']
       })
 
       store.dispatch(setInitialNow(Date.now()))

@@ -1,9 +1,7 @@
 /* @flow */
-import React from 'react'
-import CSSModules from 'react-css-modules'
-import style from './style.scss'
+import React, { Component } from 'react'
 
-class Home extends React.Component {
+class Home extends Component {
 
   render () {
     return (
@@ -12,4 +10,4 @@ class Home extends React.Component {
   }
 }
 
-export default CSSModules(Home, style)
+export default Home

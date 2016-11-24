@@ -1,21 +1,43 @@
+/* @flow */
 import React, { Component, PropTypes } from 'react'
-import CSSModules from 'react-css-modules'
-import style from './style.scss'
+import { fontFace, style, before } from 'glamor'
+
+const styles = {
+  icon: {
+    fontFamily: fontFace({
+      fontFamily: 'iconfont',
+      src: [
+        `url('${require('./iconfont.eot')}')`,
+        `url('${require('./iconfont.eot')}') format('embedded-opentype')`,
+        `url('${require('./iconfont.woff')}') format('woff')`,
+        `url('${require('./iconfont.svg')}') format('svg')`
+      ]
+    }),
+    fontSize: '16px',
+    fontStyle: 'normal',
+    WebkitFontSmoothing: 'antialiased',
+    WebkitTextStrokeWidth: '0.2px',
+    MozOsxFontSmoothing: 'grayscale'
+  }
+}
+
+const iconNameMap = {
+  search: before({
+    content: '"\\e65c"'
+  })
+}
 
 class Icon extends Component {
+
   static propTypes = {
-    name: PropTypes.string
+    name: PropTypes.string.isRequired
   }
 
   render () {
-    const { name, ...attributes } = this.props
     return (
-      <i styleName={`icon icon-${name}`} {...attributes} />
+      <i className={`${style(styles.icon)} ${iconNameMap[this.props.name]}`} />
     )
   }
 }
 
-export default CSSModules(Icon, style, {
-  errorWhenNotFound: false,
-  allowMultiple: true
-})
+export default Icon

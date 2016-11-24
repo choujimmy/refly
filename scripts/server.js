@@ -2,16 +2,15 @@
 import path from 'path'
 import cp from 'child_process'
 import serverConfig from './webpack/config.server'
-import { ServerInstance } from './types/process.d'
 
-const RUNNING_REGEXP = /服务启动成功, 侦听地址 http:\/\/(.*?)\//
+const RUNNING_REGEXP = /==> \[SERVER] -> 服务启动成功, 侦听地址 http:\/\/(.*?)\//
 
-let serverInstance: ServerInstance
+let serverInstance: any
 const { output } = serverConfig
 const serverPath = path.join(output.path, output.filename)
 
 // 运行或者重启nodejs服务端
-const server = (): Promise<ServerInstance> => {
+const server = (): Promise<any> => {
   return new Promise(resolve => {
     let pending = true
 

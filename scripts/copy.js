@@ -1,6 +1,7 @@
 /* @flow */
 import path from 'path'
 import gaze from 'gaze'
+import colors from 'colors'
 import { writeFile, copyFile, makeDir, copyDir, cleanDir } from './lib/fs'
 import pkg from '../package.json'
 
@@ -47,7 +48,7 @@ const copy = async () => {
         default:
           return
       }
-      console.log(`[文件 ${event}] ${dist}`)
+      console.log(colors.gray(`==> [${event.toUpperCase()}] -> 文件：${dist}`))
     })
   }
 }

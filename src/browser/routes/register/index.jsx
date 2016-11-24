@@ -1,7 +1,5 @@
 /* @flow */
 import React, { Component } from 'react'
-import CSSModules from 'react-css-modules'
-import style from './style.scss'
 
 class Register extends Component {
 
@@ -11,7 +9,5 @@ class Register extends Component {
     )
   }
 }
-
-Register = CSSModules(Register, style)
 
 export default Register
