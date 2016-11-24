@@ -1,10 +1,12 @@
 /* @flow */
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { rehydrate } from 'glamor'
 
 import Root from './Root'
 import configureStore from '../common/store/configureStore'
 
+rehydrate(window.__IDS__)
 const store = configureStore(window.__INITIAL_STATE__)
 const container = document.getElementById('app')
 

@@ -1,6 +1,7 @@
 /* @flow */
 import Koa from 'koa'
 import React from 'react'
+import { renderStatic } from 'glamor/server'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { readFileSync } from 'fs'
 import { createServerRenderContext, ServerRouter } from 'react-router'
@@ -15,34 +16,38 @@ import { setInitialNow } from '../common/reducers/runtime/actions'
 const assets = JSON.parse(readFileSync(`${__dirname}/assets.json`, 'utf-8'))
 
 const renderBody = (store, context, location) => {
-  const markup = renderToString(
-    <Provider store={store}>
-      <ServerRouter
-        context={context}
-        location={location}
-      >
-        <App />
-      </ServerRouter>
-    </Provider>,
-  )
-  return { markup, helmet: Helmet.rewind() }
+  const { html, css, ids } = renderStatic(() => {
+    return renderToString(
+      <Provider store={store}>
+        <ServerRouter
+          context={context}
+          location={location}
+        >
+          <App />
+        </ServerRouter>
+      </Provider>
+    )
+  })
+  return { html, css, ids, helmet: Helmet.rewind() }
 }
 
-const renderScripts = (state, appJsFilename) =>
+const renderScripts = (state, appJsFilename, ids) =>
 `
   <script>
+    window.__IDS__ = ${JSON.stringify(ids)}
     window.__INITIAL_STATE__ = ${JSON.stringify(state)};
   </script>
   <script src="${appJsFilename}"></script>
 `
 
 const renderHtml = (state, bodyMarkupWithHelmet) => {
-  const { markup: bodyMarkup, helmet } = bodyMarkupWithHelmet
-  const scriptsMarkup = renderScripts(state, assets.main.js)
+  const { html, css, ids, helmet } = bodyMarkupWithHelmet
+  const scriptsMarkup = renderScripts(state, assets.main.js, ids)
   const markup = renderToStaticMarkup(
     <Html
       appCssFilename={assets.main.css}
-      bodyHtml={`<div id="app">${bodyMarkup}</div>${scriptsMarkup}`}
+      appStyles={css}
+      bodyHtml={`<div id="app">${html}</div>${scriptsMarkup}`}
       helmet={helmet}
     />
   )
