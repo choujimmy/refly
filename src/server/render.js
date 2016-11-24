@@ -1,6 +1,7 @@
 /* @flow */
 import Koa from 'koa'
 import React from 'react'
+import colors from 'colors'
 import { renderStatic } from 'glamor/server'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { readFileSync } from 'fs'
@@ -79,7 +80,7 @@ const render = () => {
       const htmlMarkup = renderHtml(store.getState(), bodyMarkupWithHelmet)
       ctx.body = htmlMarkup
     } catch (err) {
-      console.log('服务端渲染错误:', err)
+      console.log(colors.yellow(`服务端渲染错误: ${err}`))
       next(err)
     }
   }

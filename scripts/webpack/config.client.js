@@ -23,7 +23,7 @@ const config = {
     publicPath: '/assets/',
     sourcePrefix: '  ',
     filename: isDebug ? '[name]-[hash].js' : '[name].[hash].js',
-    chunkFilename: isDebug ? '[name]-[hash].[id].js' : '[name].[id].[hash].js'
+    chunkFilename: isDebug ? '[name]-[chunkhash].[id].js' : '[name].[id].[chunkhash].js'
   },
   resolve: {
     modules: [path.resolve(__dirname, '../../src'), 'node_modules'],
@@ -129,7 +129,7 @@ const config = {
     }),
 
     new ExtractTextPlugin({
-      filename: isDebug ? '[name]-[hash].css' : '[name].[hash].css',
+      filename: isDebug ? '[name]-[chunkhash].css' : '[name].[chunkhash].css',
       allChunks: true
     }),
 

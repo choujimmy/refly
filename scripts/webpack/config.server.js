@@ -133,7 +133,7 @@ const config = {
     }),
 
     new ExtractTextPlugin({
-      filename: isDebug ? '[name]-[hash].css' : '[name].[hash].css',
+      filename: isDebug ? '[name]-[chunkhash].css' : '[name].[chunkhash].css',
       allChunks: true
     }),
 
