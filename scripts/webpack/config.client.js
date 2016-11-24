@@ -1,11 +1,14 @@
 /* @flow */
 import path from 'path'
+import { readFileSync } from 'fs'
 import webpack from 'webpack'
 import AssetsPlugin from 'assets-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 const isDebug = !process.argv.includes('--release')
 const isVerbose = process.argv.includes('--verbose')
+
+const manifest = JSON.parse(readFileSync(path.resolve(__dirname, '../../build/public/vendor/manifest.json'), 'utf-8'))
 
 const config = {
   context: path.resolve(__dirname, '../../src'),
@@ -70,7 +73,8 @@ const config = {
             'transform-flow-strip-types',
             ...!isDebug ? [] : [
               'transform-react-jsx-source',
-              'transform-react-jsx-self'
+              'transform-react-jsx-self',
+              'react-hot-loader/babel'
             ]
           ]
         }
@@ -120,6 +124,11 @@ const config = {
       'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
       'process.env.BROWSER': true,
       __DEV__: isDebug
+    }),
+
+    new webpack.DllReferencePlugin({
+      manifest,
+      context: path.resolve(__dirname, '../../src')
     }),
 
     // 使用assets-webpack-plugin插件生成包含文件的路径json文件

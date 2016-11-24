@@ -2,6 +2,7 @@
 // forked from https://github.com/kriasoft/webpack-middleware/blob/master/middleware.js
 import MemoryFileSystem from 'memory-fs'
 import mime from 'mime'
+import colors from 'colors'
 
 const HASH_REGEXP = /[0-9a-f]{10,}/
 
@@ -67,7 +68,7 @@ const webpackMiddleware = (compiler: any, options: Object) => {
         console.log(stats.toString(options.stats))
       }
       if (!options.noInfo && !options.quiet) {
-        console.info('webpack: bundle is now VALID.')
+        console.info(colors.green('==> [WEBPACK] -> 打包完毕'))
       }
       // execute callback that are delayed
       const cbs = callbacks
@@ -87,7 +88,7 @@ const webpackMiddleware = (compiler: any, options: Object) => {
   // on compiling
   const invalidPlugin = () => {
     if (state && (!options.noInfo && !options.quiet)) {
-      console.info('webpack: bundle is now INVALID.')
+      console.info(colors.yellow('==> [WEBPACK] -> 需要重新打包'))
     }
     state = false
   }

@@ -15,6 +15,7 @@ import configureStore from '../common/store/configureStore'
 import { setInitialNow } from '../common/reducers/runtime/actions'
 
 const assets = JSON.parse(readFileSync(`${__dirname}/assets.json`, 'utf-8'))
+const vendorManifest = JSON.parse(readFileSync(`${__dirname}/public/vendor/manifest.json`, 'utf-8'))
 
 const renderBody = (store, context, location) => {
   const { html, css, ids } = renderStatic(() => {
@@ -38,6 +39,7 @@ const renderScripts = (state, appJsFilename, ids) =>
     window.__IDS__ = ${JSON.stringify(ids)}
     window.__INITIAL_STATE__ = ${JSON.stringify(state)};
   </script>
+  <script src="/vendor/${vendorManifest.name}.js"></script>
   <script src="${appJsFilename}"></script>
 `
 

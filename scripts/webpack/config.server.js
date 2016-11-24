@@ -1,10 +1,13 @@
 /* @flow */
 import path from 'path'
+import { readFileSync } from 'fs'
 import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 const isDebug = !process.argv.includes('--release')
 const isVerbose = process.argv.includes('--verbose')
+
+const manifest = JSON.parse(readFileSync(path.resolve(__dirname, '../../build/public/vendor/manifest.json'), 'utf-8'))
 
 const config = {
   context: path.resolve(__dirname, '../../src'),
@@ -130,6 +133,11 @@ const config = {
       'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
       'process.env.BROWSER': false,
       __DEV__: isDebug
+    }),
+
+    new webpack.DllReferencePlugin({
+      manifest,
+      context: path.resolve(__dirname, '../../src')
     }),
 
     new ExtractTextPlugin({

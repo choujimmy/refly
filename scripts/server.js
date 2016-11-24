@@ -5,7 +5,7 @@ import serverConfig from './webpack/config.server'
 
 const RUNNING_REGEXP = /==> \[SERVER] -> 服务启动成功, 侦听地址 http:\/\/(.*?)\//
 
-let serverInstance: any
+let serverProcess: any
 const { output } = serverConfig
 const serverPath = path.join(output.path, output.filename)
 
@@ -20,40 +20,40 @@ const server = (): Promise<any> => {
       process.stdout.write(data)
 
       if (match) {
-        serverInstance.host = match[1]
-        serverInstance.stdout.removeListener('data', onStdOut)
-        serverInstance.stdout.on('data', x => process.stdout.write(x))
+        serverProcess.stdout.removeListener('data', onStdOut)
+        serverProcess.stdout.on('data', x => process.stdout.write(x))
         pending = false
-        resolve(serverInstance)
+        resolve({process: serverProcess, host: match[1]})
       }
     }
 
-    if (serverInstance) {
-      serverInstance.kill('SIGTERM')
+    if (serverProcess) {
+      serverProcess.kill('SIGTERM')
     }
 
-    serverInstance = cp.spawn('node', [serverPath], {
-      env: Object.assign({ NODE_ENV: 'development' }, process.env)
+    serverProcess = cp.spawn('node', [serverPath], {
+      env: Object.assign({ NODE_ENV: 'development' }, process.env),
+      silent: false
     })
 
     if (pending) {
-      serverInstance.once('exit', (code, signal) => {
+      serverProcess.once('exit', (code, signal) => {
         if (pending) {
           throw new Error(`服务异常中断, 错误代码: ${code} 信号: ${signal}`)
         }
       })
     }
 
-    serverInstance.stdout.on('data', onStdOut)
-    serverInstance.stderr.on('data', x => process.stderr.write(x))
+    serverProcess.stdout.on('data', onStdOut)
+    serverProcess.stderr.on('data', x => process.stderr.write(x))
 
-    return serverInstance
+    return serverProcess
   })
 }
 
 process.on('exit', () => {
-  if (serverInstance) {
-    serverInstance.kill('SIGTERM')
+  if (serverProcess) {
+    serverProcess.kill('SIGTERM')
   }
 })
 

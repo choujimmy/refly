@@ -15,7 +15,7 @@ const clean = async () => {
     cleanDir('build/public/*', {
       nosort: true,
       dot: true,
-      ignore: ['build/public/.git']
+      ignore: ['build/public/.git', 'build/public/vendor']
     })
   ])
 }
