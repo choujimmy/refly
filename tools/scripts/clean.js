@@ -1,0 +1,23 @@
+/* @flow */
+import { cleanDir } from '../libs/fs'
+
+/**
+ * 清除输出目录(build)
+ */
+const clean = async () => {
+  return Promise.all([
+    cleanDir('build/*', {
+      nosort: true,
+      dot: true,
+      ignore: ['build/.git', 'build/public']
+    }),
+
+    cleanDir('build/public/*', {
+      nosort: true,
+      dot: true,
+      ignore: ['build/public/.git']
+    })
+  ])
+}
+
+export default clean
