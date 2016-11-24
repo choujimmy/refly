@@ -1,6 +1,7 @@
 /* @flow */
 import path from 'path'
 import webpack from 'webpack'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 const isDebug = !process.argv.includes('--release')
 const isVerbose = process.argv.includes('--verbose')
@@ -19,7 +20,7 @@ const config = {
   target: 'node',
   resolve: {
     modules: [path.resolve(__dirname, '../../src'), 'node_modules'],
-    extensions: ['.webpack.js', '.web.js', '.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx', '.json']
   },
 
   cache: isDebug,
@@ -85,6 +86,18 @@ const config = {
         }
       },
       {
+        test: /\.css/,
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: [
+            `css-loader?${JSON.stringify({
+              sourceMap: isDebug,
+              minimize: !isDebug
+            })}`
+          ]
+        })
+      },
+      {
         test: /\.json$/,
         loader: 'json-loader'
       },
@@ -96,7 +109,7 @@ const config = {
         test: /\.(eot|ttf|wav|mp3|png|jpg|jpeg|gif|svg|woff|woff2)$/,
         loader: 'file-loader',
         query: {
-          name: isDebug ? '[name].[ext]?[hash]' : '[hash].[ext]'
+          name: isDebug ? '[name]-[hash].[ext]' : '[hash].[ext]'
         }
       }
     ]
@@ -117,6 +130,11 @@ const config = {
       'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
       'process.env.BROWSER': false,
       __DEV__: isDebug
+    }),
+
+    new ExtractTextPlugin({
+      filename: isDebug ? '[name]-[hash].css' : '[name].[hash].css',
+      allChunks: true
     }),
 
     new webpack.BannerPlugin({

@@ -2,6 +2,7 @@
 import path from 'path'
 import webpack from 'webpack'
 import AssetsPlugin from 'assets-webpack-plugin'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 const isDebug = !process.argv.includes('--release')
 const isVerbose = process.argv.includes('--verbose')
@@ -21,8 +22,8 @@ const config = {
     path: path.resolve(__dirname, '../../build/public/assets'),
     publicPath: '/assets/',
     sourcePrefix: '  ',
-    filename: isDebug ? '[name].js?[hash]' : '[name].[hash].js',
-    chunkFilename: isDebug ? '[name].[id].js?[chunkhash]' : '[name].[id].[hash].js'
+    filename: isDebug ? '[name]-[hash].js' : '[name].[hash].js',
+    chunkFilename: isDebug ? '[name]-[hash].[id].js' : '[name].[id].[hash].js'
   },
   resolve: {
     modules: [path.resolve(__dirname, '../../src'), 'node_modules'],
@@ -83,10 +84,22 @@ const config = {
         loader: 'raw-loader'
       },
       {
+        test: /\.css/,
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: [
+            `css-loader?${JSON.stringify({
+              sourceMap: isDebug,
+              minimize: !isDebug
+            })}`
+          ]
+        })
+      },
+      {
         test: /\.(eot|ttf|wav|mp3|png|jpg|jpeg|gif|svg|woff|woff2)$/,
         loader: 'file-loader',
         query: {
-          name: isDebug ? '[name].[ext]?[hash]' : '[hash].[ext]'
+          name: isDebug ? '[name]-[hash].[ext]' : '[hash].[ext]'
         }
       }
     ]
@@ -115,13 +128,17 @@ const config = {
       filename: 'assets.json'
     }),
 
+    new ExtractTextPlugin({
+      filename: isDebug ? '[name]-[hash].css' : '[name].[hash].css',
+      allChunks: true
+    }),
+
     new webpack.optimize.OccurrenceOrderPlugin(true),
 
     ...isDebug ? [
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin()
     ] : [
-      new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           screw_ie8: true,

@@ -1,4 +1,5 @@
 /* @flow */
+import 'normalize.css'
 import React, { Component } from 'react'
 import { Match } from 'react-router'
 import Header from '../components/Header'
