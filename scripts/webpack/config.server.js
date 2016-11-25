@@ -7,8 +7,6 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 const isDebug = !process.argv.includes('--release')
 const isVerbose = process.argv.includes('--verbose')
 
-const manifest = JSON.parse(readFileSync(path.resolve(__dirname, '../../build/public/vendor/manifest.json'), 'utf-8'))
-
 const config = {
   context: path.resolve(__dirname, '../../src'),
   entry: './server/index.js',
@@ -136,7 +134,7 @@ const config = {
     }),
 
     new webpack.DllReferencePlugin({
-      manifest,
+      manifest: JSON.parse(readFileSync(path.resolve(__dirname, '../../build/public/vendor/manifest.json'), 'utf-8')),
       context: path.resolve(__dirname, '../../src')
     }),
 

@@ -23,8 +23,8 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, '../../build/public/vendor'),
-    filename: '[name]_[chunkhash].js',
-    library: '[name]_[chunkhash]'
+    filename: '[name]_[hash].js',
+    library: '[name]_[hash]'
   },
 
   stats: {
@@ -40,11 +40,31 @@ const config = {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
+      'process.env.BROWSER': true,
+      __DEV__: isDebug
+    }),
+
     new webpack.DllPlugin({
       path: path.resolve(__dirname, '../../build/public/vendor/manifest.json'),
-      name: '[name]_[chunkhash]',
+      name: '[name]_[hash]',
       context: path.resolve(__dirname, '../../src')
-    })
+    }),
+
+    new webpack.optimize.OccurrenceOrderPlugin(true),
+
+    ...isDebug ? [
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin()
+    ] : [
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          screw_ie8: true,
+          warnings: isVerbose
+        }
+      })
+    ]
   ]
 }
 

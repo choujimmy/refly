@@ -3,7 +3,6 @@ import browserSync from 'browser-sync'
 import webpack from 'webpack'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import compression from 'compression'
-import { existsSync } from 'fs'
 
 import run from './run'
 import server from './server'
@@ -13,7 +12,6 @@ import webpackMiddleware from './lib/middleware'
 import notify from './lib/notify'
 import clean from './clean'
 import copy from './copy'
-import dll from './dll'
 
 process.argv.push('--watch')
 
@@ -24,10 +22,6 @@ process.argv.push('--watch')
 const start = async () => {
   await run(clean)
   await run(copy)
-  // 判断是否已经生成webpack dll manifest
-  if (!existsSync('build/public/vendor/manifest.json')) {
-    await run(dll)
-  }
   await new Promise(resolve => {
     notify({
       title: 'WEBPACK',
