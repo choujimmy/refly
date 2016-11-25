@@ -62,6 +62,13 @@ const config = {
         compress: {
           screw_ie8: true,
           warnings: isVerbose
+        },
+        mangle: {
+          screw_ie8: true
+        },
+        output: {
+          comments: false,
+          screw_ie8: true
         }
       })
     ]

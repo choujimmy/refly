@@ -2,11 +2,9 @@
 import 'normalize.css'
 import React, { Component } from 'react'
 import { Match } from 'react-router'
+import { Module } from 'react-router-server'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import Home from './home'
-import Register from './register'
-import Login from './login'
 
 class App extends Component {
 
@@ -14,9 +12,21 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Match pattern='/' exactly component={Home} />
-        <Match pattern='/register' component={Register} />
-        <Match pattern='/login' component={Login} />
+        <Match pattern='/' exactly render={(routeProps) => (
+          <Module module={() => System.import('./home')}>
+            {module => module ? <module.default {...routeProps} /> : null }
+          </Module>
+        )} />
+        <Match pattern='/register' render={(routeProps) => (
+          <Module module={() => System.import('./register')}>
+            {module => module ? <module.default {...routeProps} /> : null }
+          </Module>
+        )} />
+        <Match pattern='/login' render={(routeProps) => (
+          <Module module={() => System.import('./login')}>
+            {module => module ? <module.default {...routeProps} /> : null }
+          </Module>
+        )} />
         <Footer />
       </div>
     )

@@ -95,6 +95,7 @@
     "react-helmet": "^3.2.2",
     "react-redux": "^4.4.6",
     "react-router": "next",
+    "react-router-server": "^1.1.1",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
     "source-map-support": "^0.4.6"

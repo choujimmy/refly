@@ -18,7 +18,7 @@ const config = {
     ] : []
   ],
   target: 'web',
-  devtool: isDebug ? 'source-map' : false,
+  devtool: isDebug ? 'cheap-module-source-map' : false,
   output: {
     path: path.resolve(__dirname, '../../build/public/assets'),
     publicPath: '/assets/',
@@ -42,7 +42,11 @@ const config = {
     cached: isVerbose,
     cachedAssets: isVerbose
   },
-
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  },
   module: {
     loaders: [
       {
@@ -150,6 +154,13 @@ const config = {
         compress: {
           screw_ie8: true,
           warnings: isVerbose
+        },
+        mangle: {
+          screw_ie8: true
+        },
+        output: {
+          comments: false,
+          screw_ie8: true
         }
       })
     ]

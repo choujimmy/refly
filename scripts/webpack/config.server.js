@@ -10,7 +10,7 @@ const isVerbose = process.argv.includes('--verbose')
 const config = {
   context: path.resolve(__dirname, '../../src'),
   entry: './server/index.js',
-  devtool: 'source-map',
+  devtool: isDebug ? 'cheap-module-source-map' : 'source-map',
   output: {
     filename: '../../server.js',
     libraryTarget: 'commonjs2',
