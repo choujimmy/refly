@@ -2,8 +2,10 @@
 import Koa from 'koa'
 import React from 'react'
 import colors from 'colors'
+import serialize from 'serialize-javascript'
 import { renderStatic } from 'glamor/server'
-import { renderToString, renderToStaticMarkup } from 'react-dom/server'
+import { renderToStaticMarkup, renderToString } from 'react-dom/server'
+
 import { readFileSync } from 'fs'
 import { createServerRenderContext, ServerRouter } from 'react-router'
 import { Provider } from 'react-redux'
@@ -18,7 +20,7 @@ const assets = JSON.parse(readFileSync(`${__dirname}/assets.json`, 'utf-8'))
 const vendorManifest = JSON.parse(readFileSync(`${__dirname}/public/vendor/manifest.json`, 'utf-8'))
 
 const renderBody = (store, context, location) => {
-  const { html, css, ids } = renderStatic(() => {
+  const { html: htmlWithStyle, css, ids } = renderStatic(() => {
     return renderToString(
       <Provider store={store}>
         <ServerRouter
@@ -30,21 +32,26 @@ const renderBody = (store, context, location) => {
       </Provider>
     )
   })
-  return { html, css, ids, helmet: Helmet.rewind() }
+  return {
+    css,
+    ids,
+    html: htmlWithStyle,
+    helmet: Helmet.rewind()
+  }
 }
 
 const renderScripts = (state, appJsFilename, ids) =>
 `
   <script>
-    window.__IDS__ = ${JSON.stringify(ids)}
-    window.__INITIAL_STATE__ = ${JSON.stringify(state)};
+    window.__STYLE_IDS__ = ${serialize(ids, { isJSON: true })};
+    window.__STORE_STATE__ = ${serialize(state, { isJSON: true })};
   </script>
   <script src="/vendor/${vendorManifest.name}.js"></script>
   <script src="${appJsFilename}"></script>
 `
 
-const renderHtml = (state, bodyMarkupWithHelmet) => {
-  const { html, css, ids, helmet } = bodyMarkupWithHelmet
+const renderHtml = (state: any, bodyMarkupWithHelmet: any) => {
+  const { css, ids, html, helmet } = bodyMarkupWithHelmet
   const scriptsMarkup = renderScripts(state, assets.main.js, ids)
   const markup = renderToStaticMarkup(
     <Html
@@ -62,6 +69,8 @@ const render = () => {
     try {
       const store = configureStore({
         user: ctx.session.user || null
+      }, {
+        cookie: ctx.headers['cookie']
       })
 
       store.dispatch(setInitialNow(Date.now()))

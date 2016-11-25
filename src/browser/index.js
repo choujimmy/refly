@@ -6,8 +6,8 @@ import { rehydrate } from 'glamor'
 import Root from './Root'
 import configureStore from '../common/store/configureStore'
 
-rehydrate(window.__IDS__)
-const store = configureStore(window.__INITIAL_STATE__)
+rehydrate(window.__STYLE_IDS__)
+const store = configureStore(window.__STORE_STATE__)
 const container = document.getElementById('app')
 
 ReactDOM.render(

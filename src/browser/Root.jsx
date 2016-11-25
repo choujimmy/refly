@@ -1,9 +1,9 @@
 import App from './routes/App'
-import React, { PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
 import { BrowserRouter } from 'react-router'
 import { Provider } from 'react-redux'
 
-export default class Root extends React.Component {
+export default class Root extends Component {
   static propTypes = {
     store: PropTypes.object
   }

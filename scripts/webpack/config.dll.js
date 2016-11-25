@@ -10,6 +10,7 @@ const vendors = [
   'react-dom',
   'react-helmet',
   'react-redux',
+  'serialize-javascript',
   'redux',
   'react-router',
   'isomorphic-fetch',
