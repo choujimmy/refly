@@ -1,20 +1,20 @@
 import App from './routes/App'
 import React, { PropTypes, Component } from 'react'
 import { BrowserRouter } from 'react-router'
-import { Provider } from 'react-redux'
+import { ApolloProvider } from 'react-apollo'
 
 export default class Root extends Component {
   static propTypes = {
-    store: PropTypes.object
+    client: PropTypes.object
   }
 
   render () {
     return (
-      <Provider store={this.props.store}>
+      <ApolloProvider client={this.props.client}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </Provider>
+      </ApolloProvider>
     )
   }
 }

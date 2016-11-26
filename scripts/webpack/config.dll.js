@@ -6,14 +6,14 @@ const isDebug = !process.argv.includes('--release')
 const isVerbose = process.argv.includes('--verbose')
 
 const vendors = [
+  'apollo-client',
   'react',
   'react-dom',
   'react-helmet',
-  'react-redux',
   'serialize-javascript',
   'redux',
+  'react-apollo',
   'react-router',
-  'isomorphic-fetch',
   'glamor'
 ]
 
@@ -22,6 +22,7 @@ const config = {
   entry: {
     vendor: vendors
   },
+  devtool: isDebug ? 'cheap-module-source-map' : false,
   output: {
     path: path.resolve(__dirname, '../../build/public/vendor'),
     filename: '[name]_[hash].js',

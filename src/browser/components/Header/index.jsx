@@ -1,6 +1,5 @@
 /* @flow */
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
 import { style } from 'glamor'
 import NotLogin from './NotLogin'
 import Search from './Search'
@@ -52,9 +51,5 @@ class Header extends Component {
     )
   }
 }
-
-Header = connect((state) => ({
-  user: state.user
-}))(Header)
 
 export default Header
