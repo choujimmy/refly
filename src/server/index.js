@@ -7,13 +7,10 @@ import serve from 'koa-static'
 import bodyParser from 'koa-bodyparser'
 import session from 'koa-session'
 import passport from 'koa-passport'
-import mount from 'koa-mount'
-import graphqlHTTP from 'koa-graphql'
 import jwt from 'koa-jwt'
 
 import { port } from '../common/config'
 import { auth } from './secret'
-import schema from './schema'
 import { render } from './render'
 
 const app = new Koa()
@@ -42,11 +39,6 @@ app.use(passport.session())
 //
 // API部分
 // -----------------------------------------------------------------------------s
-app.use(mount('/graphql', convert(graphqlHTTP({
-  schema,
-  graphiql: process.env.NODE_ENV !== 'production',
-  pretty: process.env.NODE_ENV !== 'production'
-}))))
 
 //
 // 注册服务端渲染中间件

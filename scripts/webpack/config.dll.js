@@ -9,9 +9,10 @@ const vendors = [
   'react',
   'react-dom',
   'react-helmet',
-  'react-redux',
   'serialize-javascript',
   'redux',
+  'react-redux',
+  'react-resolver',
   'react-router',
   'isomorphic-fetch',
   'glamor'
@@ -22,6 +23,7 @@ const config = {
   entry: {
     vendor: vendors
   },
+  devtool: isDebug ? 'cheap-module-source-map' : false,
   output: {
     path: path.resolve(__dirname, '../../build/public/vendor'),
     filename: '[name]_[hash].js',
