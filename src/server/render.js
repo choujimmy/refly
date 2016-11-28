@@ -67,12 +67,7 @@ const renderHtml = (state: any, bodyMarkupWithHelmet: any) => {
 const render = () => {
   return async (ctx: Koa.context, next: Function) => {
     try {
-      const store = configureStore({
-        user: ctx.session.user || null
-      }, {
-        cookie: ctx.headers['cookie']
-      })
-
+      const store = configureStore()
       store.dispatch(setInitialNow(Date.now()))
 
       const context = createServerRenderContext()

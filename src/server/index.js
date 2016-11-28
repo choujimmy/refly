@@ -2,15 +2,13 @@
 import path from 'path'
 import colors from 'colors'
 import Koa from 'koa'
-import convert from 'koa-convert'
 import serve from 'koa-static'
 import bodyParser from 'koa-bodyparser'
-import session from 'koa-session'
-import passport from 'koa-passport'
-import jwt from 'koa-jwt'
 
+import logMiddleware from './middlewares/log'
+import headerMiddleware from './middlewares/header'
+import authMiddleware from './middlewares/auth'
 import { port } from '../common/config'
-import { auth } from './secret'
 import { render } from './render'
 
 const app = new Koa()
@@ -24,21 +22,11 @@ app.use(serve(path.join(__dirname, 'public'), {
 app.use(bodyParser())
 
 //
-// 认证部分
-// -----------------------------------------------------------------------------
-app.use(convert(jwt({
-  secret: auth.jwt.secret,
-  passthrough: true,
-  cookie: 'id_token'
-})))
-app.keys = [auth.sessionKey]
-app.use(convert(session(app)))
-app.use(passport.initialize())
-app.use(passport.session())
-
-//
 // API部分
 // -----------------------------------------------------------------------------s
+app.use(logMiddleware())
+app.use(headerMiddleware())
+app.use(authMiddleware())
 
 //
 // 注册服务端渲染中间件

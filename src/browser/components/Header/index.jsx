@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
 import { style } from 'glamor'
+import Logo from './Logo'
 import NotLogin from './NotLogin'
 import Search from './Search'
 
@@ -17,16 +17,6 @@ const styles = {
     height: '4em',
     display: 'flex',
     alignItems: 'center'
-  },
-
-  logo: {
-    fontSize: '1em',
-    width: '200px',
-    color: '#007fff'
-  },
-
-  slogan: {
-    flex: 1
   }
 }
 
@@ -41,8 +31,7 @@ class Header extends Component {
     return (
       <header className={style(styles.header)}>
         <div className={style(styles.wrapper)}>
-          <a className={style(styles.logo)}>LOGO</a>
-          <span className={style(styles.slogan)}>Slogan</span>
+          <Logo />
           <Search />
           {(!user || !user.me) &&
             <NotLogin />
@@ -52,9 +41,5 @@ class Header extends Component {
     )
   }
 }
-
-Header = connect((state) => ({
-  user: state.user
-}))(Header)
 
 export default Header

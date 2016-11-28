@@ -1,6 +1,6 @@
 /* @flow */
 import 'normalize.css'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Match } from 'react-router'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -8,7 +8,7 @@ import Home from './home'
 import Register from './register'
 import Login from './login'
 
-class App extends Component {
+class App extends PureComponent {
 
   render () {
     return (
