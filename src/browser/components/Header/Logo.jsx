@@ -1,9 +1,10 @@
 /* @flow */
 import React, { Component } from 'react'
-import { Link } from 'react-router'
 import { style } from 'glamor'
 import gql from 'graphql-tag'
 import { propType } from 'graphql-anywhere'
+
+import Link from '../Link'
 
 const styles = {
   container: {

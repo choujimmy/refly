@@ -9,24 +9,20 @@ import ApolloClient, { createNetworkInterface } from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
 import { getDataFromTree } from 'react-apollo/server'
 import { readFileSync } from 'fs'
-import { createServerRenderContext, ServerRouter } from 'react-router'
+import UniversalRouter from 'universal-router'
 import Helmet from 'react-helmet'
 
-import App from '../browser/routes/App'
+import App from '../browser/components/App'
+import routes from '../browser/routes'
 import Html from './Html'
 
 const assets = JSON.parse(readFileSync(`${__dirname}/assets.json`, 'utf-8'))
 const vendorManifest = JSON.parse(readFileSync(`${__dirname}/public/vendor/manifest.json`, 'utf-8'))
 
-const renderBody = async (client, context, location) => {
+const renderBody = async (client, component, location) => {
   const app = (
     <ApolloProvider client={client}>
-      <ServerRouter
-        context={context}
-        location={location}
-      >
-        <App />
-      </ServerRouter>
+      <App>{component}</App>
     </ApolloProvider>
   )
   await getDataFromTree(app)
@@ -78,19 +74,17 @@ const render = () => {
         })
       })
 
-      const context = createServerRenderContext()
-      const result = context.getResult()
+      const route = await UniversalRouter.resolve(routes, {
+        path: ctx.path,
+        query: ctx.query
+      })
 
-      if (result.redirect) {
-        ctx.redirect(result.redirect.pathname + result.redirect.search)
+      if (route.redirect) {
+        ctx.status = route.status || 302
+        ctx.redirect(route.redirect)
         return
       }
-
-      if (result.missed) {
-        ctx.status = 404
-      }
-
-      const bodyMarkupWithHelmet = await renderBody(client, context, ctx.originalUrl)
+      const bodyMarkupWithHelmet = await renderBody(client, route.component, ctx.originalUrl)
       const htmlMarkup = renderHtml(bodyMarkupWithHelmet)
       ctx.body = htmlMarkup
     } catch (err) {

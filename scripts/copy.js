@@ -20,13 +20,13 @@ const copy = async () => {
       }
     }, null, 2)),
     copyFile('LICENSE', 'build/LICENSE'),
-    copyDir('src/common/public', 'build/public')
+    copyDir('src/browser/public', 'build/public')
   ])
 
   if (process.argv.includes('--watch')) {
     const watcher = await new Promise((resolve, reject) => {
       gaze([
-        'src/common/public/**/*'
+        'src/browser/public/**/*'
       ], (err, val) => (err ? reject(err) : resolve(val)))
     })
 

@@ -6,6 +6,7 @@ const isDebug = !process.argv.includes('--release')
 const isVerbose = process.argv.includes('--verbose')
 
 const vendors = [
+  'history',
   'apollo-client',
   'react',
   'react-dom',
@@ -13,7 +14,7 @@ const vendors = [
   'serialize-javascript',
   'redux',
   'react-apollo',
-  'react-router',
+  'universal-router',
   'glamor'
 ]
 

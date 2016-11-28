@@ -8,7 +8,7 @@ import bodyParser from 'koa-bodyparser'
 import mount from 'koa-mount'
 import graphqlHTTP from 'koa-graphql'
 
-import { port } from '../common/config'
+import { port } from '../config'
 import schema from './schema'
 import { render } from './render'
 

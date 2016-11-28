@@ -1,7 +1,8 @@
 /* @flow */
 import React, { Component } from 'react'
-import { Link } from 'react-router'
 import { style } from 'glamor'
+
+import Link from '../Link'
 
 const styles = {
   container: {

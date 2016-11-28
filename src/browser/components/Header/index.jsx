@@ -28,6 +28,7 @@ class Header extends Component {
 
   render () {
     const { user } = this.props
+    console.log('render header')
     return (
       <header className={style(styles.header)}>
         <div className={style(styles.wrapper)}>
