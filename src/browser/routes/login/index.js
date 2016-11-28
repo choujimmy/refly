@@ -1,5 +1,7 @@
 /* @flow */
 import React from 'react'
+import Helmet from 'react-helmet'
+
 import Layout from '../../components/Layout'
 import Login from './Login'
 
@@ -10,6 +12,8 @@ export default {
     return {
       component: (
         <Layout>
+          <Helmet
+            title='Login' />
           <Login />
         </Layout>
       )
