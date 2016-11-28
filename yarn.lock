@@ -2581,6 +2581,28 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.4, graceful-fs@^4.1.6, graceful-fs@^4.1.9:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/graceful-readlink/download/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
+graphql-anywhere:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/graphql-anywhere/download/graphql-anywhere-1.0.0.tgz#29735317192eb7c9040bf58a11aeeff484c8c18b"
+  dependencies:
+    lodash.assign "^4.0.8"
+    lodash.clonedeep "^4.3.2"
+    lodash.countby "^4.4.0"
+    lodash.flatten "^4.2.0"
+    lodash.forown "^4.1.0"
+    lodash.has "^4.3.1"
+    lodash.identity "^3.0.0"
+    lodash.includes "^4.1.2"
+    lodash.isequal "^4.2.0"
+    lodash.isnull "^3.0.0"
+    lodash.isnumber "^3.0.3"
+    lodash.isobject "^3.0.2"
+    lodash.isstring "^4.0.1"
+    lodash.isundefined "^3.0.1"
+    lodash.mapvalues "^4.4.0"
+    lodash.merge "^4.6.0"
+    lodash.pick "^4.2.0"
+
 graphql-anywhere@^0.3.0:
   version "0.3.0"
   resolved "http://registry.npm.taobao.org/graphql-anywhere/download/graphql-anywhere-0.3.0.tgz#7f8d6b421bbf0fb6322e2a921854c4f5ef357a17"
