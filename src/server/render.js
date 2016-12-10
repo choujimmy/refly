@@ -40,7 +40,7 @@ const renderBody = (store, context, location) => {
   }
 }
 
-const renderScripts = (state, appJsFilename, ids) =>
+const renderScripts = (state: Object, appJsFilename: string, ids: Array<string>) =>
 `
   <script>
     window.__STYLE_IDS__ = ${serialize(ids, { isJSON: true })};
@@ -50,7 +50,7 @@ const renderScripts = (state, appJsFilename, ids) =>
   <script src="${appJsFilename}"></script>
 `
 
-const renderHtml = (state: any, bodyMarkupWithHelmet: any) => {
+const renderHtml = (state: Object, bodyMarkupWithHelmet: any) => {
   const { css, ids, html, helmet } = bodyMarkupWithHelmet
   const scriptsMarkup = renderScripts(state, assets.main.js, ids)
   const markup = renderToStaticMarkup(

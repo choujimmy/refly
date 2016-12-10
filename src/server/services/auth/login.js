@@ -10,9 +10,10 @@ import { SECRET_KEY } from '../../secret'
  * @param  {[Number]} days      [token有效期天数]
  * @return {[String]}           [jwt字符串]
  */
-const generateToken = (userId: number, userAgent: string, days: number) => {
+const generateToken = (userId: number, roles: Array<string>, userAgent: string, days: number) => {
   return jwt.sign({
     userId,
+    roles,
     userAgent,
     days,
     renewTime: moment().add(1, 'h').unix()

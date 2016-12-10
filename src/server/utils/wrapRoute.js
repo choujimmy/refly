@@ -1,9 +1,20 @@
+/* @flow */
 import _ from 'lodash'
+import Koa from 'koa'
 import colors from 'colors'
 import ValidationError from './errors/ValidationError'
 
-export default (fn, ...args) => {
-  return async (ctx) => {
+const setUnauthrization = (ctx: Koa.context) => {
+  const reqId = ctx.state ? (ctx.state.reqId || '') : ''
+  ctx.status = 401
+  ctx.body = { reqId, message: '未授权的访问' }
+}
+
+export default (roles: Array<string>, fn: Function, ...args: any) => {
+  return async (ctx: Koa.context) => {
+
+
+
     const reqId = ctx.state.reqId
     const isPost = ctx.method === 'POST'
 

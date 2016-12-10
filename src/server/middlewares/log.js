@@ -28,7 +28,7 @@ export default () => {
     const ms = moment().valueOf() - startUnixtime
     const payload = {
       time: start.format('YYYY-MM-DD HH:mm:ss'),
-      latency: `${ms}毫秒`
+      latency: ms
     }
     if (requestUrl.startsWith('/api/')) {
       payload.request = {
